@@ -1,5 +1,6 @@
 using ST10252746_CLDV6212_POE_PART3.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 namespace ST10252746_CLDV6212_POE_PART3
 {
     public class Program
@@ -14,6 +15,8 @@ namespace ST10252746_CLDV6212_POE_PART3
             //Adding DB Context builder services with options
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
           options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersDEV")));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ST10252746_CLDV6212_POE_PART3Context>();
 
 
             var app = builder.Build();
@@ -36,6 +39,8 @@ namespace ST10252746_CLDV6212_POE_PART3
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapRazorPages();
 
             app.Run();
         }
