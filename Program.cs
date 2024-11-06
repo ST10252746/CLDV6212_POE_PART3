@@ -1,3 +1,5 @@
+using ST10252746_CLDV6212_POE_PART3.Data;
+using Microsoft.EntityFrameworkCore;
 namespace ST10252746_CLDV6212_POE_PART3
 {
     public class Program
@@ -8,6 +10,11 @@ namespace ST10252746_CLDV6212_POE_PART3
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //Adding DB Context builder services with options
+            builder.Services.AddDbContext<ApplicationDBContext>(options =>
+          options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersDEV")));
+
 
             var app = builder.Build();
 
