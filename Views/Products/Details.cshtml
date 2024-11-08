@@ -1,0 +1,54 @@
+﻿@model ST10252746_CLDV6212_POE_PART3.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="container-product">
+    <h1>Details</h1>
+
+    <div class="product-details-container">
+        <div class="product-details-header">
+            Product Details
+        </div>
+        <div class="product-details-content">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img src="@Model.ImageUrlpath" class="product-image" />
+                </div>
+                <div class="col-sm-9">
+                    <div class="product-details-label">Name:</div>
+                    <div class="product-details-value">@Model.Name</div>
+
+                    <div class="product-details-label">Description:</div>
+                    <div class="product-details-value">@Model.ProductDescription</div>
+
+                    <div class="product-details-label">Price:</div>
+                    <div class="product-details-value">@Model.Price</div>
+
+                    <div class="product-details-label">Category:</div>
+                    <div class="product-details-value">@Model.Category</div>
+
+                    <div class="product-details-label">Availability:</div>
+                    <div class="product-details-value availability">
+                        @{
+                            if (Model.Availability.HasValue && Model.Availability.Value)
+                            {
+                                <p class="available-true">Available</p>
+                            }
+                            else
+                            {
+                                <p class="available-false">Out of Stock</p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-options">
+        <a asp-action="Edit" asp-route-id="@Model?.ProductId" class="btn btn-primary">Edit</a> |
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+
+</div>

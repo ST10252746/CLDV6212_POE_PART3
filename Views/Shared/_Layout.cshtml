@@ -1,52 +1,208 @@
-﻿<!DOCTYPE html>
+﻿﻿<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ST10252746_CLDV6212_POE_PART3</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ST10252746_CLDV6212_POE_PART3.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ABC Retail</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/slick.css" />
+
+    <link href="~/css/tooplate-little-fashion.css" rel="stylesheet">
+    <!--
+
+    <!-- Font Awesome-->
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    Tooplate 2127 Little Fashion
+
+    https://www.tooplate.com/view/2127-little-fashion
+
+    -->
 </head>
+
 <body>
+
+    <section class="preloader">
+        <div class="spinner">
+            <span class="sk-inner-circle"></span>
+        </div>
+    </section>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ST10252746_CLDV6212_POE_PART3</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <partial name="_LoginPartial" />
-                </div>
+
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+            <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+                <!-- Image element added before the text -->
+                <img src="~/images/slideshow/btsLogo.jpg" alt="ABC Retail Logo" class="navbar-logo">
+                <h2 class="m-0 text-primary">ABC Retail</h2>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav me-auto p-4 p-lg-0">
+                <!--Navigation Links for the different Pages-->
+                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/About" class="nav-item nav-link">About Us</a>
+                @* Role-based navigation links that will display different links based on type of user logged in *@
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="/Products" class="nav-item nav-link">Inventory List</a>
+                    <a href="/Orders/Admin" class="nav-item nav-link">Process Orders</a>
+                    <a href="/OrderRequests/" class="nav-item nav-link">View Order Request</a>
+                    <a href="/Identity/Account/Register" class="nav-item nav-link">Register Users</a>
+                    <a href="/MyWork/Index" class="nav-item nav-link">Purchase Products</a>
+                    <a href="/Files/Index" class="nav-item nav-link">Manage Contracts</a>
+                }
+                else if (User.IsInRole("Client"))
+                {
+                    <a href="/MyWork/Index" class="nav-item nav-link">Purchase Products</a>
+                    <a href="/MyWork/Cart" class="nav-item nav-link">View Cart</a>
+                    <a href="/Orders/OrderHistory" class="nav-item nav-link">View My Orders</a>
+                    <a href="/Files/Index" class="nav-item nav-link">View Contracts</a>
+                }
             </div>
-        </nav>
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
     </header>
-    <div class="container">
+    <!-- Navbar End -->
+    <div class="">
         <main role="main" class="pb-3">
+            <!--RenderBody is typically used to render the view content for each specific page. -->
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="site-footer">
         <div class="container">
-            &copy; 2024 - ST10252746_CLDV6212_POE_PART3 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+
+                <div class="col-lg-3 col-10 me-auto mb-4">
+                    <h4 class="text-white mb-3"><a href="index.html"></a> ABC Retail</h4>
+                    <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2024 <strong>ABC Retails</strong></p>
+                    <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0"> <strong>Designed by TooPlate HTML Templates</strong></p>
+                    <br>
+
+                </div>
+
+                <div class="col-lg-5 col-8">
+                    <h5 class="text-white mb-3">Sitemap</h5>
+
+                    <ul class="footer-menu d-flex flex-wrap">
+                        <li class="footer-menu-item"> <a class="btn btn-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="footer-menu-item">  <a class="btn btn-link" asp-area="" asp-controller="About" asp-action="Index">About Us</a></li>
+                        <li class="footer-menu-item"> <a class="btn btn-link" asp-controller="MyWork" asp-action="Index">View Merchandise</a>></li>
+                     
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-4">
+                    <h5 class="text-white mb-3">Social</h5>
+
+                    <ul class="social-icon">
+
+                        <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+
+                        <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+                        <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                        <li><a href="#" class="social-icon-link bi-skype"></a></li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- JAVASCRIPT FILES -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Headroom.js"></script>
+    <script src="~/js/jQuery.headroom.js"></script>
+    <script src="~/js/slick.min.js"></script>
+    <script src="~/js/custom.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="~/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<style>
+    /* Header Styling */
+    header {
+        background-color: #ffffff; /* Adjust as needed */
+        
+    }
+
+        header .navbar-brand h2.m-0.text-primary {
+        color: #000000 !important; /* Use !important to override framework styles */
+        font-family: 'Times New Roman', serif;
+        font-size: 2.8rem;
+        font-weight: bold;
+    }
+    /* Ensure the image and text are aligned */
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-logo {
+        max-height: 50px; /* Adjust size as needed */
+        margin-right: 10px; /* Space between image and text */
+    }
+
+    .navbar-nav .nav-link {
+        font-family: 'Times New Roman', serif;
+        font-size: 1.2rem; /* Adjust size as needed */
+        font-weight: bold;
+        color: #0e1f62 !important;
+       
+    }
+
+        .navbar-nav .nav-link:hover {
+            color: #0e1f62 !important; /* Hover color for nav links */
+        }
+
+</style>
+<!--
+/*
+ ================================================================
+// Code Attribution
+
+Author: Mick Gouweloos
+Link: https://github.com/mickymouse777/Cloud_Storage
+Date Accessed: 20 August 2024
+
+Author: W3schools
+Link: https://www.w3schools.com/colors/colors_picker.asp
+Date Accessed: 21 August 2024
+
+Author: W3schools
+Link: https://www.w3schools.com/css/css_font.asp 
+Date Accessed: 21 August 2024
+
+ *********All Images used throughout project are adapted from https://bangtanpictures.net/index.php and https://shop.weverse.io/en/home*************
+
+ ================================================================
+ */
+ 
+<!--All PAGES are edited but layout depicted from Tooplate Template-
+(https://www.tooplate.com/) -->

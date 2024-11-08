@@ -1,0 +1,116 @@
+﻿@model IEnumerable<ST10252746_CLDV6212_POE_PART3.Models.Product>
+
+@{
+    ViewData["Title"] = "MyWork";
+}
+
+<
+<!--Below is HTML code for the My Work Page with css classes to style the pages-->
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5 mb-5">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">My Work</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">My Work</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Add a button to view the shopping cart -->
+<div class="container text-center mb-4">
+    <a href="@Url.Action("Cart", "MyWork")" class="btn btn-primary">
+        <i class="fa fa-shopping-cart"></i> View Shopping Cart
+    </a>
+</div>
+
+
+<!-- Projects Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="section-title text-center">
+            <h1 class="display-5 mb-5">My Work</h1>
+        </div>
+      
+            <div class="row g-4 portfolio-container">
+                    @foreach (var product in Model)
+                    {
+                    <div class="col-lg-4 col-md-6 portfolio-item @product.Category.ToLower() wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <img class="img-fluid w-100 img-h" src="@product.ImageUrlpath" alt="">
+                                <div class="portfolio-overlay">
+                                    <a class="btn btn-square btn-outline-light mx-1" href="@product.ImageUrlpath" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                                </div>
+                            </div>
+                            <div class="border border-5 border-light border-top-0 p-4">
+                                <p class="text-primary fw-medium mb-2">@product.Category</p>
+                                <h5 class="lh-base mb-0">@product.Name</h5>
+                                <p class="card-description">@product.ProductDescription</p>
+                                <p class="card-price"><strong>Price: </strong> R @(product.Price?.ToString("0.00"))</p>
+                                    @if (product.Availability == true)
+                                    {
+                                    <div class="availability-box bg-green text-white">Available</div>
+                                    }
+                                    else
+                                    {
+                                    <div class="availability-box bg-red text-white">Out of stock</div>
+                                    }
+                            </div>
+                            <div class="add-to-cart-icon" data-product-id="@product.ProductId">
+                                <!-- "Add to Cart - adds to orderRequests" icon here -->
+                                <i class="fa fa-cart-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    }
+            </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.add-to-cart-icon').on('click', function () {
+                var productId = $(this).data('product-id');
+
+                // Check product availability
+                $.ajax({
+                    url: '@Url.Action("CheckProductAvailability", "MyWork")',
+                    type: 'POST',
+                    data: { productId: productId },
+                    success: function (response) {
+                        if (response.success) {
+                            // If product is available, proceed to add to cart
+                            $.ajax({
+                                url: '@Url.Action("CreateOrder", "MyWork")',
+                                type: 'POST',
+                                data: { productId: productId },
+                                success: function (response) {
+                                    if (response.success) {
+                                        alert('Product added to cart successfully.');
+                                    } else {
+                                        alert('Failed to add product to cart.');
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    alert('Error adding product to cart: ' + xhr.responseText);
+                                }
+                            });
+                        } else {
+                            // Product is not available
+                            alert(response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Error checking product availability: ' + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

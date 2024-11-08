@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ST10252746_CLDV6212_POE_PART3.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-products">
+    <h1>Product Inventory</h1>
+
+
+    <a class="create-new" asp-action="Create">Create New</a>
+
+
+    <div class="filter-container">
+        <p>Filter By Category:</p>
+        @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+        {
+            <div class="form-group">
+                @Html.DropDownList("category", ViewBag.Category as SelectList, "All Categories", new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        }
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Availability</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductDescription)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Availability)</td>
+                    <td>
+                        <img src="@item.ImageUrlpath" alt="Product Image" style="width: 100px; height: 110px;" />
+                    </td>
+                    <td class="actions">
+                        <a href="@Url.Action("Edit", new { id = item.ProductId })"><i class="fas fa-edit"></i> Edit</a>
+                        <a href="@Url.Action("Details", new { id = item.ProductId })"><i class="fas fa-info-circle"></i> Details</a>
+                        <a href="@Url.Action("Delete", new { id = item.ProductId })"><i class="fas fa-trash-alt"></i> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

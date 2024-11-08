@@ -1,0 +1,85 @@
+﻿@model ST10252746_CLDV6212_POE_PART3.Models.Order
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+
+</head>
+<body>
+    <div class="cart-container">
+        <h2>Your Shopping Cart</h2>
+
+        @if (Model != null && Model.OrderRequests.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var orderRequest in Model.OrderRequests)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@orderRequest.Product.ImageUrlpath" alt="@orderRequest.Product.Name" width="100" height="100" />
+                                <span>@orderRequest.Product.Name</span>
+                            </td>
+                            <td>R @orderRequest.Product.Price?.ToString("0.00")</td>
+                            <td>
+                                <button class="remove-button" onclick="removeFromCart(@orderRequest.Product.ProductId)">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="total-price">
+                Total Price: R @Model.OrderRequests.Sum(or => or.Product.Price ?? 0).ToString("0.00")
+            </div>
+            <!-- Hidden input to store total price -->
+            <input type="hidden" id="totalPrice" value="@Model.OrderRequests.Sum(or => or.Product.Price ?? 0).ToString("0.00")" />
+            <button class="checkout-button" onclick="checkout()">Checkout</button>
+        }
+        else
+        {
+            <p class="empty-cart">Your cart is empty.</p>
+        }
+    </div>
+
+    @section Scripts {
+        <script>
+            function checkout() {
+                var totalPrice = document.getElementById('totalPrice').value;
+                $.post('/MyWork/Checkout', { totalPrice: totalPrice }, function (response) {
+                    if (response.success) {
+                        alert('Order placed successfully');
+                        window.location.href = '/MyWork/Index'; // Redirect to product listing after checkout
+                    } else {
+                        alert(response.message);
+                    }
+                });
+            }
+        </script>
+        <script>
+            function removeFromCart(productId) {
+                $.post('/MyWork/RemoveFromCart', { productId: productId }, function (response) {
+                    if (response.success) {
+                        alert('Item removed from cart');
+                        location.reload(); // Refresh the page to update the cart
+                    } else {
+                        alert(response.message);
+                    }
+                });
+            }
+        </script>
+
+    }
+</body>
+</html>

@@ -2,6 +2,8 @@ using ST10252746_CLDV6212_POE_PART3.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Humanizer;
+using ST10252746_CLDV6212_POE_PART3.Services;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 namespace ST10252746_CLDV6212_POE_PART3
 {
     public class Program
@@ -17,16 +19,21 @@ namespace ST10252746_CLDV6212_POE_PART3
             var configuration = builder.Configuration;
 
             // Register BlobService with configuration
-            ////builder.Services.AddSingleton(new BlobService(configuration.GetConnectionString("AzureStorage")));
+            builder.Services.AddSingleton(new BlobService(configuration.GetConnectionString("AzureStorage")));
 
             // Register QueueService with configuration
-            //builder.Services.AddSingleton<QueueService>(sp =>
-            //{
-            //    var connectionString = configuration.GetConnectionString("AzureStorage");
-            //    return new QueueService(connectionString); // Pass connection string only
-            //});
+            builder.Services.AddSingleton<QueueService>(sp =>
+            {
+                var connectionString = configuration.GetConnectionString("AzureStorage");
+                return new QueueService(connectionString); // Pass connection string only
+            });
 
-
+            // Register FileShareService with configuration
+            builder.Services.AddSingleton<FileShareService>(sp =>
+            {
+                var connectionString = configuration.GetConnectionString("AzureStorage");
+                return new FileShareService(connectionString, "contractshares");
+            });
             //Adding DB Context builder services with options
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
                        options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersDEV")));

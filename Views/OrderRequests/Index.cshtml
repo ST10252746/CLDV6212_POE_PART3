@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ST10252746_CLDV6212_POE_PART3.Models.OrderRequest>
+
+@{
+    ViewData["Title"] = "Order Requests";
+}
+<div class="container-products">
+    <h1>Order Requests</h1>
+
+    <form asp-controller="OrderRequests" asp-action="Index" method="get" class="form-inline mb-4">
+        <div class="form-group d-flex align-items-center mx-sm-3 mb-2">
+            <label for="searchString" class="sr-only">Search by Order ID:</label>
+            <input type="text" class="form-control form-control-sm" id="searchString" name="searchString" placeholder="Search by Order ID" value="@ViewData["CurrentFilter"]" />
+            <button type="submit" class="btn btn-primary btn-sm ml-2"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+        </div>
+    </form>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Order Request ID</th>
+                <th>Order ID</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.OrderRequestId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Product.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Product.Price)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

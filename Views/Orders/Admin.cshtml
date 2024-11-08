@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ST10252746_CLDV6212_POE_PART3.Models.OrderAdminViewModel>
+
+<div class="container-products">
+    <h2>Admin - Orders</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>User Email</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.OrderDate</td>
+                    <td>@order.UserEmail</td>
+                    <td>R @(order.TotalPrice.ToString("0.00"))</td>
+                    <td>@order.Status</td>
+
+                    <td>
+                        @if (order.Status == "Pending")
+                        {
+                            <a asp-action="ProcessOrder" asp-route-id="@order.OrderId" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Approve Order</a>
+                        }
+                        else
+                        {
+                            <span></span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
