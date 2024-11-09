@@ -35,8 +35,12 @@ namespace ST10252746_CLDV6212_POE_PART3
                 return new FileShareService(connectionString, "contractshares");
             });
             //Adding DB Context builder services with options
+          //  builder.Services.AddDbContext<ApplicationDBContext>(options =>
+                   //    options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersDEV")));
+
+            //Adding DB Context builder services with options
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
-                       options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersDEV")));
+                       options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersLIVE")));
 
             //Added service for Authorization for Role based Access
             builder.Services.AddDefaultIdentity<IdentityUser>().AddDefaultTokenProviders()
