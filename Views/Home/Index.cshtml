@@ -1,8 +1,153 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@{ ViewData["Title"] = "Home Page"; }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Hero Section with Video Background and Welcome Message -->
+<section class="hero-section">
+    <video autoplay loop muted playsinline class="hero-video">
+        <source src="~/videos/bts_intro.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay">
+        <h1 class="hero-welcome glow-text">Welcome to the BTS Universe</h1>
+        <p class="hero-subtitle">Immerse yourself in exclusive BTS-inspired merchandise!</p>
+        <a href="#shop" class="btn btn-glow">Shop Now</a>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section class="about section-padding" id="about" style="background-image: url('/images/slideshow/header.jpg');">
+    <div class="container text-center text-white">
+        <h2 class="section-title glow-text">About ABC Retail</h2>
+        <p class="section-subtitle">Discover high-quality, exclusive BTS merchandise tailored for true fans. From collectibles to daily essentials, explore our world of BTS.</p>
+        <a href="/About/" class="btn btn-outline-light btn-lg">Learn More</a>
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured-products section-padding" id="shop">
+    <div class="container">
+        <h2 class="section-title text-center mb-5 glow-text">Featured Products</h2>
+        <div class="row">
+            <!-- Product Item 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="product-card">
+                    <img src="~/images/products/Cassette.jpg" alt="Dynamite Limited Edition Cassette" class="img-fluid product-image">
+                    <h3 class="product-title">Dynamite - Limited Edition Cassette</h3>
+                    <p class="product-price">R250.00</p>
+                </div>
+            </div>
+            <!-- Product Item 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="product-card">
+                    <img src="~/images/products/Camera.png" alt="V Disposable Camera LAYOVER" class="img-fluid product-image">
+                    <h3 class="product-title">V Disposable Camera LAYOVER</h3>
+                    <p class="product-price">R250.00</p>
+                </div>
+            </div>
+            <!-- Product Item 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="product-card">
+                    <img src="~/images/products/Hoodie.png" alt="RM Hoodie RIGHT PERSON WRONG TIME" class="img-fluid product-image">
+                    <h3 class="product-title">RM Hoodie (Black) RIGHT PERSON WRONG TIME</h3>
+                    <p class="product-price">R250.00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials section-padding" style="background-color: #222268;">
+    <div class="container text-center text-white">
+        <h2 class="section-title glow-text">What Our Fans Say</h2>
+        <p class="testimonial">"The quality and design of the merchandise are top-notch! I feel closer to BTS than ever!"</p>
+        <p class="testimonial">"ABC Retail's collection is a dream come true for every ARMY!"</p>
+    </div>
+</section>
+
+<!-- Custom Styles -->
+<style>
+    /* Hero Section */
+    .hero-section {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        color: #ffffff;
+    }
+    .hero-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    .hero-welcome {
+        font-size: 4rem;
+        color: #c14ffc;
+        text-shadow: 0 0 10px #4f2afe, 0 0 20px #c14ffc;
+    }
+    .hero-subtitle {
+        font-size: 1.5rem;
+        margin-top: 10px;
+        color: #ff66c4;
+    }
+
+    /* Button Glow Effect */
+    .btn-glow {
+        background-color: #c14ffc;
+        color: #fff;
+        font-weight: bold;
+        padding: 12px 24px;
+        transition: box-shadow 0.3s;
+    }
+    .btn-glow:hover {
+        box-shadow: 0 0 15px #c14ffc, 0 0 25px #4f2afe;
+    }
+
+    /* Sections */
+    .section-padding {
+        padding: 60px 0;
+    }
+    .glow-text {
+        color: #ff66c4;
+        text-shadow: 0 0 5px #ff66c4, 0 0 10px #4f2afe, 0 0 15px #c14ffc;
+    }
+
+    /* Featured Products */
+    .product-card {
+        text-align: center;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .product-title {
+        color: #4f2afe;
+        font-weight: bold;
+    }
+    .product-price {
+        color: #c14ffc;
+        font-size: 1.2rem;
+    }
+
+    /* Testimonials */
+    .testimonial {
+        font-style: italic;
+        color: #c14ffc;
+        margin: 20px 0;
+        font-size: 1.2rem;
+    }
+
+    /* Animation */
+    @@keyframes textGlow {
+        0% { text-shadow: 0 0 5px #c14ffc, 0 0 15px #4f2afe; }
+        100% { text-shadow: 0 0 20px #ff66c4, 0 0 30px #4f2afe; }
+    }
+</style>

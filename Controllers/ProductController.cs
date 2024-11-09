@@ -13,16 +13,15 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
     {
         private readonly ApplicationDBContext _context;
         private readonly BlobService _blobService;
+        private readonly QueueService _queueService;
 
-
-        public ProductsController(ApplicationDBContext context, BlobService blobService)
+        public ProductsController(ApplicationDBContext context, BlobService blobService, QueueService queueService)
         {
             _context = context;
             _blobService = blobService;
+            _queueService = queueService;
         }
 
-        // GET: Products
-        // GET: Products
         public IActionResult Index(string category)
         {
             IQueryable<string> categoryQuery = from p in _context.Product
@@ -30,11 +29,9 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
                                                select p.Category;
 
             var distinctCategories = categoryQuery.Distinct().ToList();
-
             ViewBag.Category = new SelectList(distinctCategories);
 
             IQueryable<Product> products = _context.Product;
-
             if (!string.IsNullOrEmpty(category))
             {
                 products = products.Where(p => p.Category == category);
@@ -43,7 +40,6 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
             return View(products.ToList());
         }
 
-        // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -61,23 +57,17 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductId,Name,ProductDescription,Price,Category,Availability,ImageUrlpath")] Product product, IFormFile file)
         {
-            // Handle file upload if file is provided
             if (file != null && file.Length > 0)
             {
-                // Check if file is an image
                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
                 var extension = Path.GetExtension(file.FileName).ToLower();
 
@@ -98,12 +88,15 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+
+                string imageUploadMessage = $"Product ID:{product.ProductId}, Image url: {product.ImageUrlpath}, Status: Uploaded Successfully";
+                await _queueService.SendMessageAsync("imageupload", imageUploadMessage);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
         }
 
-        // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -119,9 +112,6 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
             return View(product);
         }
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,ProductDescription,Price,Category,Availability")] Product product)
@@ -131,14 +121,12 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
                 return NotFound();
             }
 
-            // Fetch the existing product to retain the ImageUrlpath
             var existingProduct = await _context.Product.AsNoTracking().FirstOrDefaultAsync(p => p.ProductId == id);
             if (existingProduct == null)
             {
                 return NotFound();
             }
 
-            // Preserve the ImageUrlpath
             product.ImageUrlpath = existingProduct.ImageUrlpath;
 
             if (ModelState.IsValid)
@@ -164,7 +152,6 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
             return View(product);
         }
 
-        // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -182,7 +169,6 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
             return View(product);
         }
 
-        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -190,7 +176,6 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
             var product = await _context.Product.FindAsync(id);
             if (product != null)
             {
-                // Delete the image in Blob Storage if it exists
                 if (!string.IsNullOrEmpty(product.ImageUrlpath))
                 {
                     await _blobService.DeleteBlobAsync(product.ImageUrlpath);
@@ -202,7 +187,6 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
 
         private bool ProductExists(int id)
         {

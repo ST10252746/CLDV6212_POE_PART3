@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
 namespace ST10252746_CLDV6212_POE_PART3.Models
 {
+
     public class Product
     {
         public int ProductId { get; set; }

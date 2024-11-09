@@ -13,21 +13,22 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
     {
         private readonly ApplicationDBContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly QueueService _queueService;
 
-        public OrdersController(ApplicationDBContext context, UserManager<IdentityUser> userManager)
+        public OrdersController(ApplicationDBContext context, UserManager<IdentityUser> userManager, QueueService queueService)
         {
             _context = context;
             _userManager = userManager;
+            _queueService = queueService;
         }
 
-
-        // Admin View
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Admin()
         {
             var orders = await _context.Orders
                 .Include(o => o.User)
-                .Where(o => o.Status != "Shopping" && o.TotalPrice.HasValue)
+         .Where(o => o.Status != "Shopping" && o.TotalPrice.HasValue)
+
                 .ToListAsync();
 
             var orderViewModels = orders.Select(o => new OrderAdminViewModel
@@ -42,7 +43,6 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
             return View(orderViewModels);
         }
 
-        // Process Order
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ProcessOrder(int id)
         {
@@ -53,14 +53,14 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
                 return NotFound();
             }
 
-            // Update the OrderStatus to "Approved"
             order.Status = "Approved";
-
             await _context.SaveChangesAsync();
+
+            string message = $"Processing Order: Order ID: {order.OrderId} | Created Date: {order.OrderDate} | Total Price: R {order.TotalPrice} | Customer ID: {order.UserId} | Order Status: {order.Status}";
+            await _queueService.SendMessageAsync("processorders", message);
 
             return RedirectToAction(nameof(Admin));
         }
-
 
         [Authorize(Roles = "Client,Admin")]
         public async Task<IActionResult> OrderHistory()
@@ -69,7 +69,7 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
             var userId = await _userManager.GetUserIdAsync(user);
 
             var orders = await _context.Orders
-                 .Where(o => o.UserId == userId && o.Status != "Shopping" && o.TotalPrice.HasValue)
+            .Where(o => o.UserId == userId && o.Status != "Shopping" && o.TotalPrice.HasValue)
                 .Select(o => new OrderHistoryViewModel
                 {
                     OrderId = o.OrderId,
