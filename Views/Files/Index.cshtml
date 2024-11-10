@@ -1,40 +1,169 @@
 ﻿@model List<ST10252746_CLDV6212_POE_PART3.Models.FileModel>
  
-<h1>Files</h1>
- 
+<h1></h1>
+
 <!-- Display any messages -->
 @if (TempData["Message"] != null)
 {
-<div class="alert alert-info">
+    <div class="alert alert-info">
         @TempData["Message"]
-</div>
+    </div>
 }
- 
-<!-- Upload form -->
-<form asp-action="Upload" method="post" enctype="multipart/form-data">
-<div class="form-group">
-<label for="file">Choose a file to upload:</label>
-<input type="file" name="file" class="form-control" />
-<button type="submit" class="btn btn-primary mt-2">Upload</button>
-</div>
-</form>
- 
+
+<!-- Check if the current user has the "Admin" role -->
+@if (User.IsInRole("Admin"))
+{
+    <!-- Upload form -->
+    <form asp-action="Upload" method="post" enctype="multipart/form-data" class="upload-form">
+        <div class="form-group">
+            <label for="file">Choose a file to upload:</label>
+            <input type="file" name="file" class="form-control" />
+            <button type="submit" class="btn btn-primary mt-2">Upload</button>
+        </div>
+    </form>
+}
+
 <!-- Display uploaded files -->
 @if (Model != null && Model.Count > 0)
 {
-<ul>
+    <ul class="custom-list">
         @foreach (var file in Model)
         {
-<li>
-                @file.Name -
-                Size: @file.DisplaySize -
-                Last Modified: @file.LastModified?.ToString("g")
+            <li>
+                @file.Name - Size: @file.DisplaySize - Last Modified: @file.LastModified?.ToString("g")
                 - <a asp-action="DownloadFile" asp-route-fileName="@file.Name">Download</a>
-</li>
+            </li>
         }
-</ul>
+    </ul>
 }
 else
 {
-<p>No files found or model is null.</p>
+    <p class="no-files-message">No files found or model is null.</p>
 }
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Helvetica', sans-serif;
+        background-color: #524da0;
+        color: black; /* Dark text for readability */
+        margin: 0;
+        padding: 0;
+        font-size: 80%; /* Adjusting global font size for 80% zoom */
+    }
+
+    /* Alert Message Style */
+    .alert-info {
+        max-width: 480px; /* Reduced max width */
+        margin: 16px auto; /* Reduced margin */
+        padding: 12px; /* Reduced padding */
+        border-radius: 4px;
+        color: white;
+        background-color: darkred;
+        border: 1px solid #c3e6cb;
+    }
+
+    /* Form Styles */
+    .upload-form {
+        max-width: 480px; /* Reduced max width */
+        margin: 40px auto; /* Reduced margin */
+        padding: 16px; /* Reduced padding */
+        background-color: #531b6a;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: 'Helvetica', sans-serif;
+        font-weight: bold;
+        font-size: 14px; /* Reduced font size */
+        color: white;
+    }
+
+    /* Form Group Styles */
+    .form-group {
+        margin-bottom: 12px; /* Reduced bottom margin */
+    }
+
+    /* Label Styles */
+    .upload-form label {
+        font-family: 'Helvetica', sans-serif;
+        font-weight: bold;
+        font-size: 14px; /* Reduced font size */
+        color: white;
+        margin-bottom: 4px; /* Reduced margin */
+        display: block;
+    }
+
+    /* File Input and Button Styles */
+    .upload-form input[type="file"] {
+        font-family: 'Helvetica', sans-serif;
+        font-weight: bold;
+        font-size: 14px; /* Reduced font size */
+        color: #432cd6;
+        display: block;
+        width: 100%;
+        padding: 8px; /* Reduced padding */
+        border: 1px solid #ccc; /* Light border for inputs */
+        border-radius: 4px;
+        box-sizing: border-box; /* Ensure padding and border are included in width */
+    }
+
+    .upload-form button[type="submit"] {
+        font-family: 'Helvetica', sans-serif;
+        font-weight: bold;
+        font-size: 14px; /* Reduced font size */
+        display: inline-block;
+        padding: 8px 16px; /* Reduced padding */
+        border-radius: 4px;
+        color: #fff; /* White text */
+        background-color: #2d2697;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+        margin-top: 8px; 
+    }
+
+        .upload-form button[type="submit"]:hover {
+            background-color: #432cd6;
+        }
+
+    /* List Styles */
+    .custom-list {
+        list-style-type: none;
+        padding: 0;
+        max-width: 480px; /* Reduced max width */
+        margin: 40px auto 16px auto; /* Reduced margin */
+        font-family: 'Helvetica', sans-serif;
+        font-size: 14px;
+        text-align: center;
+    }
+
+        .custom-list li {
+            padding: 8px; /* Reduced padding */
+            border-bottom: 1px solid #ddd; /* Light border for item separation */
+            background-color: #fff;
+            margin-bottom: 4px; /* Reduced margin */
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+            .custom-list li a {
+                font-family: 'Helvetica', sans-serif;
+                font-size: 14px; 
+                color: #2d2697;
+                text-decoration: none;
+            }
+
+                .custom-list li a:hover {
+                    text-decoration: underline; /* Underline on hover */
+                    color: #c14ffc;
+                }
+
+    /* No Files Message Style */
+    .no-files-message {
+        text-align: center;
+        color: darkred;
+        font-size: 1em; 
+    }
+
+</style>

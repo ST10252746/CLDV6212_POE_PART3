@@ -24,6 +24,8 @@
     <link href="~/css/tooplate-little-fashion.css" rel="stylesheet">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
     <!--
 
     <!-- Font Awesome-->
@@ -157,11 +159,22 @@
     header {
         background-color: #ffffff;
     }
+    /* Styling the header */
+    .navbar-brand h2.m-0.text-primary {
+        color: #531b6a !important; 
+        font-family: 'Bangers', sans-serif; /* Playful K-pop font */
+        font-size: 45px; 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adding a cool shadow effect */
+        letter-spacing: 1px; /* Slightly increased spacing to make it bolder and more dynamic */
+        text-transform: uppercase; /* Make it all caps for a more energetic feel */
+        transition: all 0.3s ease; /* Smooth transition for hover effect */
+    }
 
-        header .navbar-brand h2.m-0.text-primary {
-            color: #000000 !important;
-            font-family: 'Helvetica', sans-serif;
-            font-size: 40px;
+        /* Adding hover effect for a dynamic K-pop look */
+        .navbar-brand h2.m-0.text-primary:hover {
+            color: #9a38c0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+            transform: scale(1.1); /* Slight zoom-in effect when hovering */
         }
 
     /* Navbar brand alignment */
@@ -173,16 +186,16 @@
     .navbar-logo {
         max-height: 100px;
         margin-right: 10px;
-        margin-left: -10px;
+        margin-left: -20px;
     }
 
     /* Navbar link styling */
     .navbar-nav .nav-link {
         font-family: 'Helvetica', sans-serif;
-        font-size: 16px;
+        font-size: 13px;
         font-weight: bold;
         color: #262459 !important;
-        margin-right: 20px; /* Increase spacing between links */
+        margin-right: 5px; 
     }
 
         .navbar-nav .nav-link:hover {

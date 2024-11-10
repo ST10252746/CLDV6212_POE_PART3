@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ST10252746_CLDV6212_POE_PART3.Models;
 using ST10252746_CLDV6212_POE_PART3.Services;
 
@@ -47,7 +48,7 @@ namespace ST10252746_CLDV6212_POE_PART3.Controllers
         }
 
         [HttpPost]
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Upload(IFormFile file)
 
         {
