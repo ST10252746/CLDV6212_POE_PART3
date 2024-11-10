@@ -47,42 +47,44 @@
     <header>
 
         <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top p-0">
             <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
                 <!-- Image element added before the text -->
-                <img src="~/images/slideshow/btsLogo.jpg" alt="ABC Retail Logo" class="navbar-logo">
+                <img src="~/images/logo_new.png" alt="ABC Retail Logo" class="navbar-logo">
                 <h2 class="m-0 text-primary">ABC Retail</h2>
             </a>
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav me-auto p-4 p-lg-0">
-                <!--Navigation Links for the different Pages-->
-                <a href="/" class="nav-item nav-link">Home</a>
-                @* Role-based navigation links that will display different links based on type of user logged in *@
-                @if (User.IsInRole("Admin"))
-                {
-                    <a href="/Products" class="nav-item nav-link">Inventory List</a>
-                    <a href="/Orders/Admin" class="nav-item nav-link">Process Orders</a>
-                    <a href="/OrderRequests/" class="nav-item nav-link">View Order Request</a>
-                    <a href="/Identity/Account/Register" class="nav-item nav-link">Register Users</a>
-                    <a href="/MyWork/Index" class="nav-item nav-link">Purchase Products</a>
-                    <a href="/Files/Index" class="nav-item nav-link">Manage Contracts</a>
-                }
-                else if (User.IsInRole("Client"))
-                {
-                    <a href="/MyWork/Index" class="nav-item nav-link">Purchase Products</a>
-                    <a href="/MyWork/Cart" class="nav-item nav-link">View Cart</a>
-                    <a href="/Orders/OrderHistory" class="nav-item nav-link">View My Orders</a>
-                    <a href="/Files/Index" class="nav-item nav-link">View Contracts</a>
-                }
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav me-auto p-4 p-lg-0">
+                    <!--Navigation Links for the different Pages-->
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    @* Role-based navigation links that will display different links based on type of user logged in *@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="/Products" class="nav-item nav-link">Inventory List</a>
+                        <a href="/Orders/Admin" class="nav-item nav-link">Process Orders</a>
+                        <a href="/OrderRequests/" class="nav-item nav-link">View Order Request</a>
+                        <a href="/Identity/Account/Register" class="nav-item nav-link">Register Users</a>
+                        <a href="/MyWork/Index" class="nav-item nav-link">Purchase Products</a>
+                        <a href="/Files/Index" class="nav-item nav-link">Manage Contracts</a>
+                    }
+                    else if (User.IsInRole("Client"))
+                    {
+                        <a href="/MyWork/Index" class="nav-item nav-link">Purchase Products</a>
+                        <a href="/MyWork/Cart" class="nav-item nav-link">View Cart</a>
+                        <a href="/Orders/OrderHistory" class="nav-item nav-link">View My Orders</a>
+                        <a href="/Files/Index" class="nav-item nav-link">View Contracts</a>
+                    }
+                </div>
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <partial name="_LoginPartial" />
+                </div>
             </div>
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <partial name="_LoginPartial" />
-            </div>
-        </div>
-    </nav>
+        </nav>
+ 
+
 
     </header>
     <!-- Navbar End -->
@@ -97,35 +99,38 @@
         <div class="container">
             <div class="row">
 
+                <!-- ABC Retail Section -->
                 <div class="col-lg-3 col-10 me-auto mb-4">
-                    <h4 class="text-white mb-3"><a href="index.html"></a> ABC Retail</h4>
-                    <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2024 <strong>ABC Retails</strong></p>
-                    <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0"> <strong>Designed by TooPlate HTML Templates</strong></p>
-                    <br>
-
+                    <h4 class="text-white mb-3">
+                        ABC Retail</h4>
+                    <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">
+                        Copyright © 2024 <strong>ABC Retail</strong>
+                    </p>
+                    <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">
+                        <strong>Designed by TooPlate HTML Templates</strong>
+                    </p>
                 </div>
 
+                <!-- Sitemap Section -->
                 <div class="col-lg-5 col-8">
                     <h5 class="text-white mb-3">Sitemap</h5>
-
                     <ul class="footer-menu d-flex flex-wrap">
-                        <li class="footer-menu-item"> <a class="btn btn-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li class="footer-menu-item"> <a class="btn btn-link" asp-controller="MyWork" asp-action="Index">View Merchandise</a>></li>
-                     
+                        <li class="footer-menu-item">
+                            <a class="btn btn-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="footer-menu-item">
+                            <a class="btn btn-link" asp-controller="MyWork" asp-action="Index">View Merchandise</a>
+                        </li>
                     </ul>
                 </div>
 
+                <!-- Social Media Section -->
                 <div class="col-lg-3 col-4">
                     <h5 class="text-white mb-3">Social</h5>
-
                     <ul class="social-icon">
-
                         <li><a href="#" class="social-icon-link bi-youtube"></a></li>
-
                         <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-
                         <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
                         <li><a href="#" class="social-icon-link bi-skype"></a></li>
                     </ul>
                 </div>
@@ -133,6 +138,7 @@
             </div>
         </div>
     </footer>
+
     <!-- JAVASCRIPT FILES -->
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
@@ -149,39 +155,57 @@
 <style>
     /* Header Styling */
     header {
-        background-color: #ffffff; /* Adjust as needed */
-        
+        background-color: #ffffff;
     }
 
         header .navbar-brand h2.m-0.text-primary {
-        color: #000000 !important; /* Use !important to override framework styles */
-        font-family: 'Times New Roman', serif;
-        font-size: 2.8rem;
-        font-weight: bold;
-    }
-    /* Ensure the image and text are aligned */
+            color: #000000 !important;
+            font-family: 'Helvetica', sans-serif;
+            font-size: 40px;
+        }
+
+    /* Navbar brand alignment */
     .navbar-brand {
         display: flex;
         align-items: center;
     }
 
     .navbar-logo {
-        max-height: 50px; /* Adjust size as needed */
-        margin-right: 10px; /* Space between image and text */
+        max-height: 100px;
+        margin-right: 10px;
+        margin-left: -10px;
     }
 
+    /* Navbar link styling */
     .navbar-nav .nav-link {
-        font-family: 'Times New Roman', serif;
-        font-size: 1.2rem; /* Adjust size as needed */
+        font-family: 'Helvetica', sans-serif;
+        font-size: 16px;
         font-weight: bold;
-        color: #0e1f62 !important;
-       
+        color: #262459 !important;
+        margin-right: 20px; /* Increase spacing between links */
     }
 
         .navbar-nav .nav-link:hover {
-            color: #0e1f62 !important; /* Hover color for nav links */
+            color: #2d2697 !important;
         }
 
+    /* Move nav links closer to the left */
+    .navbar-nav {
+        margin-left: -20px; 
+    }
+
+    /* Ensure navbar stays at the top and spans the full width */
+    .fixed-top {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1030;
+    }
+
+    /* Add top margin to page content so it doesn't hide behind the navbar */
+    body {
+        padding-top: 70px;
+    }
 </style>
 <!--
 /*

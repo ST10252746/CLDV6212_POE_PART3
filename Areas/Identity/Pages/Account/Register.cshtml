@@ -4,53 +4,171 @@
     ViewData["Title"] = "Register";
 }
 
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
-    <div class="row">
-        <div class="col-md-9 offset-md-2">
-            <section class="section">
-                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                    <h2>Create a new account.</h2>
-                    <hr />
-                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Firstname" class="form-control" autocomplete="given-name" aria-required="true" placeholder="First name" />
-                        <label asp-for="Input.Firstname">First Name</label>
-                        <span asp-validation-for="Input.Firstname" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Lastname" class="form-control" autocomplete="family-name" aria-required="true" placeholder="Last name" />
-                        <label asp-for="Input.Lastname">Last Name</label>
-                        <span asp-validation-for="Input.Lastname" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                        <label asp-for="Input.Email">Email</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.Password">Password</label>
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm password" />
-                        <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select" aria-required="true">
-                            <option disabled selected>Select Role</option>
-                        </select>
-                        <span asp-validation-for="Input.Role" class="text-danger"></span>
-                    </div>
-                    <button id="registerSubmit" type="submit" class="btn btn-reg">Register</button>
-                </form>
-            </section>
+<div class="register-container">
+    <div class="register-box">
+        <div class="register-header">
+            <i class="fas fa-user-plus registerpage-icon "></i>
+            <h1 class="register-title">Create a New Account</h1>
         </div>
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-container">
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary" role="alert"></div>
+
+            <div class="form-group">
+                <label asp-for="Input.Firstname" class="form-label">First Name</label>
+                <input asp-for="Input.Firstname" class="form-control" autocomplete="firstname" placeholder="Enter your first name" aria-required="true" />
+                <span asp-validation-for="Input.Firstname" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Lastname" class="form-label">Last Name</label>
+                <input asp-for="Input.Lastname" class="form-control" autocomplete="lastname" placeholder="Enter your last name" aria-required="true" />
+                <span asp-validation-for="Input.Lastname" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Email" class="form-label">Email</label>
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="name@example.com" aria-required="true" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Password" class="form-label">Password</label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" placeholder="Enter your password" aria-required="true" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" placeholder="Re-enter your password" aria-required="true" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Role" class="form-label">Select Role</label>
+                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select" aria-required="true">
+                    <option disabled selected>Select a role</option>
+                </select>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+            </div>
+
+            <button id="registerSubmit" type="submit" class="btn-submit">Register</button>
+        </form>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<style>
+    body {
+        font-family: 'Helvetica', sans-serif;
+        background-color: #524da0;
+        color: #333;
+    }
+
+    .register-container {
+        display: flex;
+        margin-top: 100px;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        gap: 50px;
+        margin-bottom: 50px;
+    }
+
+    .register-box {
+        background-color: #ffffff;
+        padding: 50px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        max-width: 450px;
+        width: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .register-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        }
+
+    .register-header {
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+    }
+
+    .registerpage-icon {
+        font-size: 60px;
+        color: #531b6a;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .register-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #531b6a;
+        display: block;
+        margin-left: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        color: #531b6a;
+        font-weight: 600;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.2s ease;
+    }
+
+        .form-control:focus {
+            border-color: #531b6a;
+            box-shadow: 0 0 5px rgba(38, 36, 89, 0.8);
+        }
+
+    .form-select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        font-size: 14px;
+        transition: border-color 0.2s ease;
+    }
+
+        .form-select:focus {
+            border-color: #531b6a;
+            box-shadow: 0 0 5px rgba(38, 36, 89, 0.8);
+        }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        background-color: #531b6a; /* Primary button color */
+        color: white;
+        font-size: 18px;
+        border: 1px solid #531b6a;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .btn-submit:hover {
+            background-color: #222268;
+            border-color: #222268; /* Darker button color on hover */
+            transform: scale(1.02);
+        }
+
+    .text-danger {
+        font-size: 14px;
+    }
+</style>

@@ -1,26 +1,28 @@
-﻿@{ ViewData["Title"] = "Home Page"; }
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
 
-<!-- Hero Section with Video Background and Welcome Message -->
+<!-- Hero Section with Image Background and Welcome Message -->
 <section class="hero-section">
-    <video autoplay loop muted playsinline class="hero-video">
-        <source src="~/videos/bts_intro.mp4" type="video/mp4">
-    </video>
+    <img src="~/images/bts_intro_image.jpeg" alt="BTS Universe" class="hero-image">
     <div class="hero-overlay">
         <h1 class="hero-welcome glow-text">Welcome to the BTS Universe</h1>
         <p class="hero-subtitle">Immerse yourself in exclusive BTS-inspired merchandise!</p>
-        <a href="#shop" class="btn btn-glow">Shop Now</a>
+        <a href="/MyWork/" class="btn btn-glow">Shop Now</a>
     </div>
 </section>
 
 <!-- About Us Section -->
-<section class="about section-padding" id="about" style="background-image: url('/images/slideshow/header.jpg');">
+<section class="about section-padding" id="about">
     <div class="container text-center text-white">
         <h2 class="section-title glow-text">About ABC Retail</h2>
-        <p class="section-subtitle">Discover high-quality, exclusive BTS merchandise tailored for true fans. From collectibles to daily essentials, explore our world of BTS.</p>
-        <a href="/About/" class="btn btn-outline-light btn-lg">Learn More</a>
+        <p class="section-subtitle">Discover high-quality, exclusive BTS merchandise tailored for true fans.</p>
+        <p class="section-subtitle">From collectibles to daily essentials, explore our world of BTS.</p>
+        <p class="section-description">At ABC Retail, we are passionate about bringing fans closer to the world of BTS. Our carefully curated collection includes limited-edition items, high-quality memorabilia, and unique BTS-themed products designed to enhance your fan experience. Whether you're a collector, a casual fan, or someone who just loves BTS, our store has something special for everyone. We believe in celebrating the artistry and impact of BTS through each product we offer, and we're committed to delivering the best to all ARMY members worldwide.</p>
+        <p class="section-description">Our mission is to provide an easy, enjoyable, and secure shopping experience for our fans. With every product we offer, we aim to make your BTS journey even more unforgettable. Join us as we continue to grow and celebrate the global impact of BTS!</p>
+        <p class="section-description">Our team is dedicated to offering the best possible shopping experience, ensuring that every product meets the high standards set by the ARMY. We take pride in being a part of the BTS universe and continually strive to improve and expand our collection. Our commitment goes beyond products; we want to create a community where fans can share their passion and celebrate BTS together!</p>
     </div>
 </section>
-
 <!-- Featured Products Section -->
 <section class="featured-products section-padding" id="shop">
     <div class="container">
@@ -39,17 +41,22 @@
                 <div class="product-card">
                     <img src="~/images/products/Camera.png" alt="V Disposable Camera LAYOVER" class="img-fluid product-image">
                     <h3 class="product-title">V Disposable Camera LAYOVER</h3>
-                    <p class="product-price">R250.00</p>
+                    <p class="product-price">R100.00</p>
                 </div>
             </div>
             <!-- Product Item 3 -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="product-card">
-                    <img src="~/images/products/Hoodie.png" alt="RM Hoodie RIGHT PERSON WRONG TIME" class="img-fluid product-image">
-                    <h3 class="product-title">RM Hoodie (Black) RIGHT PERSON WRONG TIME</h3>
+                    <img src="~/images/products/Calender.png" alt="Jungkook Acrylic Stand Calendar SEVEN" class="img-fluid product-image">
+                    <h3 class="product-title">Jungkook Acrylic Stand Calendar</h3>
                     <p class="product-price">R250.00</p>
                 </div>
             </div>
+        </div>
+
+        <!-- Shop Now Button -->
+        <div class="text-center mt-4">
+            <a href="/MyWork/" class="btn btn-glow">Shop Our Merchandise Now</a>
         </div>
     </div>
 </section>
@@ -72,11 +79,13 @@
         overflow: hidden;
         color: #ffffff;
     }
-    .hero-video {
+
+    .hero-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
+
     .hero-overlay {
         position: absolute;
         top: 50%;
@@ -84,15 +93,19 @@
         transform: translate(-50%, -50%);
         text-align: center;
     }
+
     .hero-welcome {
         font-size: 4rem;
         color: #c14ffc;
         text-shadow: 0 0 10px #4f2afe, 0 0 20px #c14ffc;
+        font-family: 'Helvetica', sans-serif;
     }
+
     .hero-subtitle {
         font-size: 1.5rem;
         margin-top: 10px;
         color: #ff66c4;
+        font-family: 'Helvetica', sans-serif;
     }
 
     /* Button Glow Effect */
@@ -102,39 +115,82 @@
         font-weight: bold;
         padding: 12px 24px;
         transition: box-shadow 0.3s;
+        font-family: 'Helvetica', sans-serif;
     }
-    .btn-glow:hover {
-        box-shadow: 0 0 15px #c14ffc, 0 0 25px #4f2afe;
-    }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 15px #c14ffc, 0 0 25px #4f2afe;
+            font-family: 'Helvetica', sans-serif;
+        }
 
     /* Sections */
     .section-padding {
         padding: 60px 0;
     }
+
+    .section-title{
+        font-family: 'Helvetica', sans-serif;
+        font-size: 50px;
+    }
+
     .glow-text {
         color: #ff66c4;
         text-shadow: 0 0 5px #ff66c4, 0 0 10px #4f2afe, 0 0 15px #c14ffc;
+        font-family: 'Helvetica', sans-serif;
     }
 
+    /* About Us Section */
+    .about {
+        background-color: #222268;
+        color: #ffffff;
+        font-family: 'Helvetica', sans-serif; 
+    }
+
+    .section-subtitle{
+        font-size: 1.2rem;
+        line-height: 1.8;
+       
+        margin-top: 20px;
+        color: #c14ffc;
+        font-family: 'Helvetica', sans-serif;
+
+    }
+    .section-description {
+        font-size: 1.2rem;
+        line-height: 1.8;
+       
+        margin-top: 18px;
+        color: #c14ffc;
+        font-family: 'Helvetica', sans-serif;
+    }
     /* Featured Products */
     .product-card {
         text-align: center;
         padding: 1rem;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Default shadow */
+        border: 2px solid #c14ffc; /* Purple glow border */
+        transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+        font-family: 'Helvetica', sans-serif;
     }
-    .product-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+            
+            box-shadow: 0 0 10px 3px rgba(194, 79, 252, 0.8); /* Purple glow effect */
+        }
+
     .product-title {
         color: #4f2afe;
         font-weight: bold;
     }
+
     .product-price {
         color: #c14ffc;
-        font-size: 1.2rem;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: 'Helvetica', sans-serif;
     }
 
     /* Testimonials */
@@ -143,11 +199,17 @@
         color: #c14ffc;
         margin: 20px 0;
         font-size: 1.2rem;
+        font-family: 'Helvetica', sans-serif;
     }
 
     /* Animation */
-    @@keyframes textGlow {
-        0% { text-shadow: 0 0 5px #c14ffc, 0 0 15px #4f2afe; }
-        100% { text-shadow: 0 0 20px #ff66c4, 0 0 30px #4f2afe; }
+   @@keyframes textGlow {
+        0% {
+            text-shadow: 0 0 5px #c14ffc, 0 0 15px #4f2afe;
+        }
+
+        100% {
+            text-shadow: 0 0 20px #ff66c4, 0 0 30px #4f2afe;
+        }
     }
 </style>
