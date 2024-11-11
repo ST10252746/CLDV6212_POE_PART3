@@ -1,18 +1,97 @@
-﻿﻿@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 
 @model IdentityRole
-<div class="row">
-    <div class="col-md-4">
+<div class="role-container">
+    <div class="role-box">
+        <h2 class="role-title">Create Role</h2>
         <form method="post">
-            <h2>Create Role</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Name" class="form-control" aria-required="true" />
-                <label asp-for="Name"></label>
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="form-label">Role Name</label>
+                <input asp-for="Name" class="form-control" aria-required="true" placeholder="Enter role name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn-submit">Save</button>
         </form>
     </div>
 </div>
+
+<style>
+    /* Container */
+    .role-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        gap: 40px;
+    }
+
+    /* Role Box */
+    .role-box {
+        background-color: white;
+        padding: 32px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+    }
+
+    /* Title */
+    .role-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #531b6a;
+        margin-bottom: 24px;
+    }
+
+    /* Form Group */
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-label {
+        color: #531b6a;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    /* Form Controls */
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.2s ease;
+    }
+
+        .form-control:focus {
+            border-color: #531b6a;
+            box-shadow: 0 0 4px rgba(38, 36, 89, 0.8);
+        }
+
+    /* Submit Button */
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        background-color: #531b6a;
+        color: white;
+        font-size: 14px;
+        border: 1px solid #531b6a;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-submit:hover {
+            background-color: #222268;
+            border-color: #222268;
+        }
+
+    /* Validation Messages */
+    .text-danger {
+        font-size: 12px;
+        color: darkred;
+    }
+</style>

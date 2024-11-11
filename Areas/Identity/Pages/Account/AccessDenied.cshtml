@@ -4,7 +4,67 @@
     ViewData["Title"] = "Access denied";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
+<header class="access-denied-header">
+    <h1 class="error-title">@ViewData["Title"]</h1>
+    <p class="error-message">You do not have access to this resource.</p>
 </header>
+
+<div class="container">
+    <a class="btn-return" href="/">Return to Home</a>
+</div>
+
+<style>
+    body {
+        font-family: 'Helvetica', sans-serif;
+        background-color: #f2f2f2;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .access-denied-header {
+        text-align: center;
+        background-color: #ffcccc;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .error-title {
+        font-size: 36px;
+        color: darkred;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .error-message {
+        font-size: 18px;
+        color: #555;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .btn-return {
+        display: inline-block;
+        background-color: #531b6a;
+        color: white;
+        padding: 12px 24px;
+        font-size: 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+    }
+
+        .btn-return:hover {
+            background-color: #222268;
+        }
+</style>
