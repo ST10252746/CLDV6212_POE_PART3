@@ -1,76 +1,58 @@
 ﻿@model IEnumerable<ST10252746_CLDV6212_POE_PART3.Models.Product>
 
-@{
-    ViewData["Title"] = "MyWork";
-}
-
-<
-<!--Below is HTML code for the My Work Page with css classes to style the pages-->
 <!-- Page Header Start -->
-<div class="container-fluid page-header py-5 mb-5">
-    <div class="container py-5">
-        <h1 class="display-3 text-white mb-3 animated slideInDown">My Work</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
-                <li class="breadcrumb-item text-white active" aria-current="page">My Work</li>
-            </ol>
-        </nav>
+<section class="hero-section">
+    <img src="~/images/mywork.jpeg" alt="BTS Universe" class="hero-image">
+    <div class="hero-overlay">
+        <h1 class="hero-welcome glow-text">Our Merchandise</h1>
     </div>
-</div>
+</section>
 <!-- Page Header End -->
 <!-- Add a button to view the shopping cart -->
 <div class="container text-center mb-4">
-    <a href="@Url.Action("Cart", "MyWork")" class="btn btn-primary">
+    <a href="@Url.Action("Cart", "MyWork")" class="btn btn-glow">
         <i class="fa fa-shopping-cart"></i> View Shopping Cart
     </a>
 </div>
 
-
 <!-- Projects Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="section-title text-center">
-            <h1 class="display-5 mb-5">My Work</h1>
-        </div>
-      
-            <div class="row g-4 portfolio-container">
-                    @foreach (var product in Model)
-                    {
-                    <div class="col-lg-4 col-md-6 portfolio-item @product.Category.ToLower() wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="rounded overflow-hidden">
-                            <div class="position-relative overflow-hidden">
-                                <img class="img-fluid w-100 img-h" src="@product.ImageUrlpath" alt="">
-                                <div class="portfolio-overlay">
-                                    <a class="btn btn-square btn-outline-light mx-1" href="@product.ImageUrlpath" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                </div>
-                            </div>
-                            <div class="border border-5 border-light border-top-0 p-4">
-                                <p class="text-primary fw-medium mb-2">@product.Category</p>
-                                <h5 class="lh-base mb-0">@product.Name</h5>
-                                <p class="card-description">@product.ProductDescription</p>
-                                <p class="card-price"><strong>Price: </strong> R @(product.Price?.ToString("0.00"))</p>
-                                    @if (product.Availability == true)
-                                    {
-                                    <div class="availability-box bg-green text-white">Available</div>
-                                    }
-                                    else
-                                    {
-                                    <div class="availability-box bg-red text-white">Out of stock</div>
-                                    }
-                            </div>
-                            <div class="add-to-cart-icon" data-product-id="@product.ProductId">
-                                <!-- "Add to Cart - adds to orderRequests" icon here -->
-                                <i class="fa fa-cart-plus"></i>
+        <div class="row g-4 portfolio-container">
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-4 col-md-6 portfolio-item @product.Category.ToLower() wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="product-card rounded overflow-hidden">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid w-100 img-h" src="@product.ImageUrlpath" alt="@product.Name">
+                            <div class="portfolio-overlay">
+                                <a class="btn btn-square btn-outline-light mx-1" href="@product.ImageUrlpath" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                             </div>
                         </div>
+                        <div class="border border-5 border-light border-top-0 p-4">
+                            <p class="text-primary fw-medium mb-2">@product.Category</p>
+                            <h5 class="lh-base mb-0">@product.Name</h5>
+                            <p class="card-description">@product.ProductDescription</p>
+                            <p class="card-price"><strong>Price: </strong> R @(product.Price?.ToString("0.00"))</p>
+                            @if (product.Availability == true)
+                            {
+                                <div class="availability-box bg-green text-white">Available</div>
+                            }
+                            else
+                            {
+                                <div class="availability-box bg-red text-white">Out of stock</div>
+                            }
+                        </div>
+                        <div class="add-to-cart-icon" data-product-id="@product.ProductId">
+                            <i class="fa fa-cart-plus"></i>
+                        </div>
                     </div>
-                    }
-            </div>
+                </div>
+            }
+        </div>
     </div>
 </div>
-
-
+<!-- Projects End -->
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -78,14 +60,12 @@
             $('.add-to-cart-icon').on('click', function () {
                 var productId = $(this).data('product-id');
 
-                // Check product availability
                 $.ajax({
                     url: '@Url.Action("CheckProductAvailability", "MyWork")',
                     type: 'POST',
                     data: { productId: productId },
                     success: function (response) {
                         if (response.success) {
-                            // If product is available, proceed to add to cart
                             $.ajax({
                                 url: '@Url.Action("CreateOrder", "MyWork")',
                                 type: 'POST',
@@ -102,7 +82,6 @@
                                 }
                             });
                         } else {
-                            // Product is not available
                             alert(response.message);
                         }
                     },
@@ -116,54 +95,129 @@
 }
 
 <style>
-    /* Style for the availability box */
-    .availability-box {
+    /* Page Header */
+    .hero-section {
+        position: relative;
+        height: 400px;
+        background-color: #000;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+    }
+
+    .hero-overlay {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+    .hero-welcome {
+        font-size: 4rem;
+        color: #c14ffc;
+        text-shadow: 0 0 10px #4f2afe, 0 0 20px #c14ffc;
+        font-family: 'Helvetica', sans-serif;
+        }
+
+    .glow-text {
+        color: #ff66c4;
+        text-shadow: 0 0 5px #ff66c4, 0 0 10px #4f2afe, 0 0 15px #c14ffc;
+        font-family: 'Helvetica', sans-serif;
+    }
+
+    /* Button Glow Effect */
+    .btn-glow {
+        padding: 10px 20px;
+        background-color: #c14ffc;
+        color: white;
+        font-size: 16px;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-glow:hover {
+            background-color: #4f2afe;
+            box-shadow: 0 0 15px #c14ffc, 0 0 25px #4f2afe;
+        }
+
+    /* Product Cards */
+    .product-card {
+        text-align: center;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Default shadow */
+        border: 2px solid #c14ffc; /* Purple glow border */
+        transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+        font-family: 'Helvetica', sans-serif;
+    }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+            box-shadow: 0 0 10px 3px rgba(194, 79, 252, 0.8); /* Purple glow effect */
+        }
+    /* Availability Box Wrapper */
+    .availability-box-wrapper {
+        position: absolute; /* Position it above the image */
+        top: 10px; /* Distance from the top of the card */
+        left: 50%;
+        transform: translateX(-50%); /* Center it horizontally */
+        z-index: 1; /* Ensure it appears above other elements */
+    }
+
+    /* Availability Box */
+    .availability-box {
         padding: 5px 10px;
         border-radius: 5px;
+        text-align: center;
         font-weight: bold;
+        width: 100%; /* Ensure it spans the entire width */
+    }
+
+    /* Optional: Adjust the hover effect to make sure the availability box remains on top */
+    .portfolio-item:hover .availability-box {
+        z-index: 2;
+    }
+
+
+    .bg-green {
+        background-color: green;
+    }
+
+    .bg-red {
+        background-color: red;
     }
 
     /* Style for the "Add to Cart" icon */
     .add-to-cart-icon {
         position: relative;
+        font-size: 25px;
         bottom: 10px;
-        right: 10px; /* Adjusted position for better visibility */
-        background-color: #007bff; /* Brighter blue color */
-        color: white;
+        left: 0px;
+        background-color: #fff;
+        color: #4f2afe;
         padding: 10px;
-        border-radius: 50%;
+        border-radius: 55%;
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s;
-        font-size: 24px; /* Larger icon size */
+        height: auto;
     }
 
         .add-to-cart-icon:hover {
-            background-color: #333;
-            color: #fff;
+            background-color: #fff;
+            color: #c14ffc;
         }
-
-    .bg-green {
-        background: green;
-        width: 79px;
-        padding: 3px;
-    }
-
-    .bg-red {
-        background-color: darkred;
-        width: 121px;
-    }
-
-    /* Adjust position of the availability box */
-    .availability-box {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-    }
-
-    .img-h {
-        height: 400px;
-    }
 </style>
