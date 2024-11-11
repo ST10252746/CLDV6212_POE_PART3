@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<ST10252746_CLDV6212_POE_PART3.Models.OrderAdminViewModel>
 
-<div class="container-products">
-    <h2>Admin - Orders</h2>
+<div class="container admin-orders-container">
+    <h2 class="admin-orders-title">Admin Process Orders</h2>
 
-    <table class="table">
+    <table class="table admin-orders-table">
         <thead>
             <tr>
                 <th>Order ID</th>
@@ -19,19 +19,18 @@
             {
                 <tr>
                     <td>@order.OrderId</td>
-                    <td>@order.OrderDate</td>
+                    <td>@order.OrderDate.ToString("yyyy-MM-dd")</td>
                     <td>@order.UserEmail</td>
                     <td>R @(order.TotalPrice.ToString("0.00"))</td>
                     <td>@order.Status</td>
-
                     <td>
                         @if (order.Status == "Pending")
                         {
-                            <a asp-action="ProcessOrder" asp-route-id="@order.OrderId" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Approve Order</a>
+                            <a asp-action="ProcessOrder" asp-route-id="@order.OrderId" class="btn btn-approve">Approve Order</a>
                         }
                         else
                         {
-                            <span></span>
+                            <span class="status-approved">Approved</span>
                         }
                     </td>
                 </tr>
@@ -39,3 +38,124 @@
         </tbody>
     </table>
 </div>
+
+<style>
+    /* Background and Container */
+    body {
+        background-color: #524da0;
+        font-family: 'Helvetica', sans-serif;
+    }
+
+    .admin-orders-container {
+        max-width: 720px;
+        margin: 40px auto;
+        padding: 15px;
+        background: linear-gradient(135deg, #531b6a 0%, #531b6a 100%);
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        color: #531b6a;
+    }
+
+    /* Title Styling */
+    .admin-orders-title {
+        text-align: center;
+        font-size: 2.4rem;
+        color: #fff;
+        margin-bottom: 16px;
+    }
+
+    /* Table Styling */
+    .admin-orders-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 12px;
+        color: #333;
+    }
+
+        .admin-orders-table thead {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #ffffff;
+        }
+
+        .admin-orders-table th {
+            padding: 10px;
+            font-weight: bold;
+            text-align: left;
+            font-size: 0.9rem;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .admin-orders-table tbody tr {
+            background-color: #ffffff;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+            .admin-orders-table tbody tr:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+        .admin-orders-table td {
+            padding: 12px;
+            text-align: left;
+            font-size: 0.9rem;
+            color: black;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        /* Table Row Styling for Card Effect */
+        .admin-orders-table tbody tr td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .admin-orders-table tbody tr td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+    /* Action Buttons Styling */
+    .btn-approve {
+        background: linear-gradient(135deg, #228c23, #28d728);
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-approve::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: skewX(-45deg);
+            transition: all 0.5s ease;
+        }
+
+        .btn-approve:hover::before {
+            left: 100%;
+        }
+
+        .btn-approve:hover {
+            background: linear-gradient(135deg, #1fab1c, #149015);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+    .status-approved {
+        color: #228c23;
+        font-weight: bold;
+    }
+</style>
