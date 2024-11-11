@@ -83,3 +83,124 @@
     }
 </body>
 </html>
+
+<style>
+    /* Page background and font */
+    body {
+        background-color: #524da0; /* Page background color */
+        font-family: 'Helvetica', sans-serif;  
+    }
+
+    /* Cart container */
+    .cart-container {
+        max-width: 576px; /* Reduced width to simulate zoom out (80% of 720px) */
+        margin: 32px auto; /* Reduced margin */
+        padding: 12px; /* Reduced padding */
+        background: linear-gradient(135deg, #531b6a 0%, #531b6a 100%);
+        border-radius: 10px; /* Slightly reduced border radius */
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15); /* Reduced shadow */
+        color: #531b6a;
+        margin-top: 60px;
+    }
+
+        /* Cart header */
+        .cart-container h2 {
+            text-align: center;
+            font-size: 1.6rem; /* Reduced header size */
+            color: white;
+            margin-bottom: 1.2rem; /* Reduced margin */
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.5); /* Slightly reduced text shadow */
+        }
+
+        /* Table styling */
+        .cart-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.2rem; /* Reduced margin */
+            background-color: #ffffff;
+            color: black;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .cart-container th, .cart-container td {
+            padding: 0.8rem; /* Reduced padding */
+            text-align: left;
+            font-size: 0.8rem; /* Reduced font size */
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.5); /* Slightly reduced text shadow */
+        }
+
+        .cart-container th {
+            background-color: #4f2afe; /* Purple header */
+            color: #ffffff;
+        }
+
+        .cart-container tr:nth-child(even) {
+            background-color: #f4f4f4; /* Light grey for alternating rows */
+        }
+
+        /* Product image */
+        .cart-container td img {
+            border-radius: 4px; /* Reduced border radius */
+        }
+
+    /* Total price section */
+    .total-price {
+        text-align: center;
+        font-size: 1.5rem; /* Reduced font size */
+        margin-top: 0.8rem; /* Reduced margin */
+        font-weight: bold;
+        color: white;
+    }
+
+    /* Empty cart message */
+    .empty-cart {
+        text-align: center;
+        font-size: 1rem; /* Reduced font size */
+        color: #eb2886;
+    }
+
+    /* Buttons */
+    .button {
+        color: white;
+        padding: 8px 16px; /* Reduced padding */
+        border: none;
+        border-radius: 4px; /* Reduced border radius */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 0.8rem; /* Reduced margin */
+    }
+
+        .button:hover {
+            background-color: #4f2afe; /* Purple on hover */
+        }
+
+    /* Remove button */
+    .remove-button {
+        background-color: #e50c0c;
+        font-size: 0.8rem; /* Reduced font size */
+        border-radius: 4px; /* Reduced border radius */
+        padding: 6px 12px; /* Reduced padding */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+    }
+
+        .remove-button:hover {
+            background-color: #e74c3c; /* Darker red for hover */
+        }
+
+    /* Checkout button */
+    .checkout-button {
+        background-color: #573dff;
+        font-size: 1rem; /* Reduced font size */
+        padding: 10px 20px; /* Reduced padding */
+        width: 100%;
+        border-radius: 4px; /* Reduced border radius */
+        margin-top: 1.2rem; /* Reduced margin */
+    }
+
+        .checkout-button:hover {
+            background-color: #eb2886;
+        }
+</style>
