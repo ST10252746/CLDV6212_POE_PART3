@@ -60,25 +60,25 @@
         </span>
     </form>
 </div>
-
 <style>
     /* General Styling */
     body {
         font-family: 'Helvetica', sans-serif;
         background-color: #524da0;
+        font-size: 80%; /* Reduce base font size to simulate 80% zoom */
     }
 
     /* Centralized Delete Container */
     .delete-container {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 20px;
+        max-width: 640px; /* Adjusted for 80% zoom effect */
+        margin: 32px auto;
+        padding: 16px;
         background: linear-gradient(135deg, #531b6a 0%, #531b6a 100%);
         border-radius: 12px;
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         text-align: center;
         transition: transform 0.3s, box-shadow 0.3s;
-       
+        margin-top: 50px;
     }
 
         .delete-container:hover {
@@ -88,31 +88,29 @@
 
         .delete-container h1 {
             color: red;
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 6px rgba(255, 3, 23, 1)
+            font-size: 2.4rem; /* Reduced font size */
+            margin-bottom: 16px;
+            text-shadow: 0 0 6px rgba(255, 3, 23, 1);
         }
 
     .product-details h4 {
-            color: white;
-            font-size: 2.4rem;
-            text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        color: white;
+        font-size: 1.9rem; /* Reduced font size */
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
         border-bottom: 1px solid #f0f2f5;
-        
-        }
+    }
 
-        .delete-container h3 {
-            font-size: 1.5rem;
-            color: black;
-            margin-bottom: 30px;
-            font-style: italic;
-      
-        }
+    .delete-container h3 {
+        font-size: 1.2rem; /* Reduced font size */
+        color: black;
+        margin-bottom: 24px;
+        font-style: italic;
+    }
 
     /* Table Styling */
     table {
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 16px; /* Reduced margin */
         background-color: #f2f2f2;
         border-radius: 8px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
@@ -122,29 +120,31 @@
     }
 
     th, td {
-        padding: 12px;
+        padding: 8px; /* Reduced padding */
         text-align: left;
         border: 1px solid #cccccc;
-
     }
-    td{
+
+    td {
         color: black;
-        font-size: 0.9rem;
+        font-size: 0.8rem; /* Reduced font size */
         font-weight: bold;
     }
+
     th {
         color: #2d2697 !important;
         text-shadow: 0 0 4px rgba(74, 0, 134, 1);
-        font-size: 1rem;
+        font-size: 0.8rem; /* Reduced font size */
         font-weight: bold;
     }
 
     tr:nth-child(even) {
-        background-color: #f9f9f9; 
+        background-color: #f9f9f9;
     }
+
     .product-image {
-        max-width: 200px;
-        margin: 20px auto;
+        max-width: 160px; /* Reduced max-width */
+        margin: 16px auto;
         display: block;
         border-radius: 6px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -153,24 +153,24 @@
     /* Availability Status */
     .available-true {
         color: green;
-        font-size: 0.9rem;
+        font-size: 0.8rem; /* Reduced font size */
         font-weight: bold;
     }
 
     .available-false {
         color: red;
-        font-size: 0.9rem;
+        font-size: 0.8rem; /* Reduced font size */
         font-weight: bold;
     }
 
     /* Form Styling */
     .delete-form {
-        margin-top: 20px;
+        margin-top: 16px; /* Reduced margin */
     }
 
         .delete-form input[type="submit"] {
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 8px 16px; /* Reduced padding */
+            font-size: 0.8rem; /* Reduced font size */
             border: none;
             border-radius: 5px;
             background-color: red;
@@ -178,6 +178,7 @@
             cursor: pointer;
             transition: background-color 0.3s;
             box-shadow: 0 0 6px rgba(255, 3, 23, 1);
+            font-weight: bold;
         }
 
             .delete-form input[type="submit"]:hover {
@@ -185,15 +186,14 @@
             }
 
     .back-link {
-        font-size: 1rem;
+        font-size: 0.8rem; /* Reduced font size */
         color: #007bff !important;
         text-decoration: none;
-       
+        font-weight: bold;
     }
 
         .back-link:hover {
             text-decoration: underline;
             color: #ff0063 !important;
         }
-
 </style>
