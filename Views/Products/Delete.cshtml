@@ -54,18 +54,19 @@
     <form asp-action="Delete" class="delete-form">
         <input type="hidden" asp-for="ProductId" />
         <input type="submit" value="Delete" class="btn btn-danger" />
-        <span class="back-link">
-            | <i class="fa fa-reply" aria-hidden="true"></i>
-            <a asp-action="Index">Back to List</a>
-        </span>
+
+        <button type="button" class="btn btn-secondary back-button" onclick="window.location.href='@Url.Action("Index", "Products")'">
+            <i class="fa fa-reply" aria-hidden="true"></i> Back to List
+        </button>
     </form>
+
 </div>
 <style>
     /* General Styling */
     body {
         font-family: 'Helvetica', sans-serif;
         background-color: #524da0;
-        font-size: 80%; /* Reduce base font size to simulate 80% zoom */
+
     }
 
     /* Centralized Delete Container */
@@ -117,24 +118,27 @@
         overflow: hidden;
         transition: transform 0.2s, box-shadow 0.2s;
         border-collapse: collapse; /* Ensures borders collapse between cells */
+        
     }
 
     th, td {
         padding: 8px; /* Reduced padding */
         text-align: left;
         border: 1px solid #cccccc;
+        font-weight: bold;
+        font-size: 0.9rem; /* Reduced font size */
     }
 
     td {
         color: black;
-        font-size: 0.8rem; /* Reduced font size */
+        font-size: 0.9rem; /* Reduced font size */
         font-weight: bold;
     }
 
     th {
         color: #2d2697 !important;
         text-shadow: 0 0 4px rgba(74, 0, 134, 1);
-        font-size: 0.8rem; /* Reduced font size */
+        font-size: 1rem;
         font-weight: bold;
     }
 
@@ -153,13 +157,13 @@
     /* Availability Status */
     .available-true {
         color: green;
-        font-size: 0.8rem; /* Reduced font size */
+        font-size: 1rem;
         font-weight: bold;
     }
 
     .available-false {
         color: red;
-        font-size: 0.8rem; /* Reduced font size */
+        font-size: 1rem;
         font-weight: bold;
     }
 
@@ -170,7 +174,7 @@
 
         .delete-form input[type="submit"] {
             padding: 8px 16px; /* Reduced padding */
-            font-size: 0.8rem; /* Reduced font size */
+            font-size: 0.88rem; /* Reduced font size */
             border: none;
             border-radius: 5px;
             background-color: red;
@@ -185,15 +189,20 @@
                 background-color: darkred;
             }
 
-    .back-link {
-        font-size: 0.8rem; /* Reduced font size */
-        color: #007bff !important;
-        text-decoration: none;
+    /* Styling for Back Button */
+    .back-button {
+        font-size: 0.88rem; /* Reduced font size */
+        padding: 8px 16px; /* Reduced padding */
+        border-radius: 5px;
+        background-color: #0696f2;
+        color: white;
+        border: none;
+        box-shadow: 0 0 8px rgba(0, 153, 255, 0.4);
+        transition: background-color 0.3s;
         font-weight: bold;
     }
 
-        .back-link:hover {
-            text-decoration: underline;
-            color: #ff0063 !important;
+        .back-button:hover {
+            background-color: #1d7cb9;
         }
 </style>

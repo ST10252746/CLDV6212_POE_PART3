@@ -1,31 +1,31 @@
 ﻿@model ST10252746_CLDV6212_POE_PART3.Models.Product
-@{
-    ViewData["Title"] = "Create";
-}
 <div class="container-product">
-    <h1>Create Product</h1>
+    <h1 class="page-title">Create New Product</h1>
 
     <form asp-action="Create" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
         <div class="form-group">
             <label asp-for="Name" class="control-label">Product Name</label>
-            <input asp-for="Name" class="form-control" />
+            <input asp-for="Name" class="form-control form-control-lg" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
+
         <div class="form-group">
             <label asp-for="ProductDescription" class="control-label">Product Description</label>
-            <input asp-for="ProductDescription" class="form-control" />
+            <input asp-for="ProductDescription" class="form-control form-control-lg" />
             <span asp-validation-for="ProductDescription" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="Price" class="control-label"></label>
-            <input asp-for="Price" class="form-control" type="number" step="0.01" />
+            <label asp-for="Price" class="control-label">Price</label>
+            <input asp-for="Price" class="form-control form-control-lg" type="number" step="0.01" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="Category" class="control-label"></label>
-            <select asp-for="Category" class="form-control">
+            <label asp-for="Category" class="control-label">Category</label>
+            <select asp-for="Category" class="form-control form-control-lg">
                 <option value="">-- Select Category --</option>
                 <option value="music collectibles">Music Collectibles</option>
                 <option value="clothes">Clothes</option>
@@ -35,30 +35,157 @@
             </select>
             <span asp-validation-for="Category" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label asp-for="Availability" class="control-label"></label>
+            <label asp-for="Availability" class="control-label">Availability</label>
             <input type="checkbox" id="Availability" name="Availability" value="true" />
             <input type="hidden" name="Availability" value="false" />
             <span asp-validation-for="Availability" class="text-danger"></span>
         </div>
+
         <div class="form-group">
             <label for="file" class="control-label">Product Image</label>
-            <input type="file" class="form-control" name="file" />
+            <input type="file" class="form-control form-control-lg" name="file" />
             <span asp-validation-for="ImageUrlpath" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-create" />
+
+        <div class="form-buttons">
+            <input type="submit" value="Create" class="btn btn-create btn-lg" />
+        </div>
+
+        <div class="form-buttons">
+            <!-- Back to List Button -->
+            <button type="button" class="btn btn-secondary back-button" onclick="window.location.href='@Url.Action("Index", "Products")'">
+                <i class="fa fa-reply" aria-hidden="true"></i> Back to List
+            </button>
         </div>
     </form>
-    <div>
-        <i class="fa fa-reply" aria-hidden="true"></i><a asp-action="Index">Back to List</a>
-    </div>
 
 </div>
-
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Helvetica', sans-serif;
+        background-color: #524da0;
+    }
+
+    /* Container Styling */
+    .container-product {
+        max-width: 800px;
+        margin: 40px auto; /* Reduced from 50px */
+        padding: 24px; 
+        background: linear-gradient(135deg, #531b6a 0%, #531b6a 100%);
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-top: 50px;
+    }
+
+        .container-product:hover {
+            transform: translateY(-4px); /* Hover effect */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    /* Page Title */
+    .page-title {
+        font-size: 2.4rem;
+        color: white; /* Match Edit View */
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: 'Helvetica', sans-serif;
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        border-bottom: 1px solid #f0f2f5;
+    }
+
+    /* Form Group Styling */
+    .form-group {
+        margin-bottom: 1.5rem;
+        background-color: white;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem; /* Reduced from 1.1rem */
+    }
+
+    .form-group:hover {
+        transform: translateY(-4px); /* Hover effect */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+        .form-group label {
+            font-size: 0.9rem; /* Reduced from 1.2rem */
+            color: #2d2697; /* Match the Edit View Label Color */
+            font-weight: bold;
+            text-shadow: 0 0 4px rgba(74, 0, 134, 1);
+        }
+
+    /* Form Control Styling */
+    .form-control {
+        font-size: 0.9rem; /* Reduced from 1.1rem */
+        padding: 8px; /* Reduced from 10px */
+        border-radius: 6px;
+        border: 1px solid #cccccc;
+        margin-bottom: 12px; /* Reduced from 15px */
+        font-weight: bold;
+        color: black;
+    }
+
+        .form-control:focus {
+            border-color: #2d2697;
+            box-shadow: 0 0 5px rgba(74, 0, 134, 1);
+        }
+
+    /* Submit Button Styling */
+    .btn-create {
+        background-color: #ff0063; /* Match the Edit View Button Color */
+        color: white;
+        padding: 10px 30px;
+        font-size: 1.125rem;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 0 8px rgba(204, 0, 134, 1);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s;
+        font-weight: bold;
+    }
+
+        .btn-create:hover {
+            background-color: #a33bfe; /* Hover effect */
+            box-shadow: 0 0 8px rgba(204, 0, 134, 1);
+        }
+
+    /* Styling for Back to List Button */
+    .back-button {
+        font-size: 0.88rem; /* Reduced font size */
+        padding: 10px 14px; /* Reduced from 12px 18px */
+        border-radius: 5px;
+        background-color: #0696f2;
+        color: white;
+        border: none;
+        box-shadow: 0 0 8px rgba(0, 153, 255, 0.4);
+        transition: background-color 0.3s;
+        font-weight: bold;
+    }
+
+        .back-button:hover {
+            background-color: #1d7cb9;
+        }
+
+    /* Optional: Styling for the container of form buttons */
+    .form-buttons {
+        margin-top: 10px;
+    }
+
+    /* Validation Errors */
+    .text-danger {
+        font-size: 0.875rem;
+        color: darkred;
+        margin-top: 4px;
+    }
+</style>
+

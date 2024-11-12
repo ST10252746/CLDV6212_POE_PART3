@@ -1,77 +1,203 @@
 ﻿@model ST10252746_CLDV6212_POE_PART3.Models.Product
-@{
-    ViewData["Title"] = "Edit";
-}
-
 <div class="edit-product">
     <h1>Edit Product</h1>
-    <h4>Product Details</h4>
+    <h4>Edit Product Details Below</h4>
     <hr />
 
-    <form asp-action="Edit">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="ProductId" />
+    <div class="product-details">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" />
 
-        <div class="form-group">
-            <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="ProductDescription" class="control-label"></label>
-            <input asp-for="ProductDescription" class="form-control" />
-            <span asp-validation-for="ProductDescription" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Price" class="control-label"></label>
-            <input asp-for="Price" class="form-control" type="number" step="0.01" />
-            <span asp-validation-for="Price" class="text-danger"></span>
-        </div>
-
-
-        <div class="form-group">
-            <label asp-for="Category" class="control-label"></label>
-            <select asp-for="Category" class="form-control">
-                <option value="">-- Select a Category --</option>
-                <option value="music collectibles">Music Collectibles</option>
-                <option value="clothes">Clothes</option>
-                <option value="home decor">Home Decor</option>
-                <option value="fan essentials">Fan Essentials</option>
-                <option value="accessories">Accessories</option>
-            </select>
-            <span asp-validation-for="Category" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Availability" class="control-label"></label>
-            <select asp-for="Availability" class="form-control">
-                <option value="True">True</option>
-                <option value="False">False</option>
-            </select>
-            <span asp-validation-for="Availability" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="ImageUrlpath" class="control-label">Product Image</label>
-            <div>
-                <img src="@Model.ImageUrlpath" alt="Product Image" style="max-width: 200px; max-height: 200px; display: block; margin: 10px 0;" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-        </div>
 
-        <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary btn-edit" />
-        </div>
-    </form>
+            <div class="form-group">
+                <label asp-for="ProductDescription" class="control-label"></label>
+                <input asp-for="ProductDescription" class="form-control" />
+                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+            </div>
 
-    <div>
-        <i class="fa fa-reply" aria-hidden="true"></i><a asp-action="Index">Back to List</a>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" class="form-control">
+                    <option value="">-- Select a Category --</option>
+                    <option value="music collectibles">Music Collectibles</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="home decor">Home Decor</option>
+                    <option value="fan essentials">Fan Essentials</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Availability" class="control-label"></label>
+                <select asp-for="Availability" class="form-control">
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+                <span asp-validation-for="Availability" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageUrlpath" class="control-label">Product Image</label>
+                <div>
+                    <img src="@Model.ImageUrlpath" alt="Product Image" style="max-width: 200px; max-height: 200px; display: block; margin: 10px 0;" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary btn-edit" />
+            </div>
+            <div class="form-buttons">
+                <!-- Back to List Button -->
+                <button type="button" class="btn btn-secondary back-button" onclick="window.location.href='@Url.Action("Index", "Products")'">
+                    <i class="fa fa-reply" aria-hidden="true"></i> Back to List
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Helvetica', sans-serif;
+        background-color: #524da0;
     }
-}
+
+    /* Edit Product Container */
+    .edit-product {
+        width: 80%;
+        max-width: 1000px;
+        padding: 24px; /* Reduced from 30px */
+        background: linear-gradient(135deg, #531b6a 0%, #531b6a 100%);
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        margin: 40px auto; /* Reduced from 50px */
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .edit-product:hover {
+            transform: translateY(-4px); /* Reduced from -5px */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Title */
+        .edit-product h1 {
+            text-align: center;
+            font-size: 2.4rem;
+            color: white;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .edit-product h4 {
+            font-size: 1.9rem;
+            color: black;
+            text-align: center;
+            margin-bottom: 8px; /* Reduced from 10px */
+            font-style: italic;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+    /* Product Details Section */
+    .product-details {
+        background-color: white;
+        padding: 16px; /* Reduced from 20px */
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form Styling */
+    .form-group label {
+        font-size: 0.9rem; /* Reduced from 1.2rem */
+        color: #2d2697 !important;
+        text-shadow: 0 0 4px rgba(74, 0, 134, 1);
+        margin-bottom: 4px; /* Reduced from 5px */
+        font-weight: bold;
+        background-color: white;
+    }
+
+    .form-control {
+        font-size: 0.9rem; /* Reduced from 1.1rem */
+        padding: 8px; /* Reduced from 10px */
+        border-radius: 6px;
+        border: 1px solid #cccccc;
+        margin-bottom: 12px; /* Reduced from 15px */
+        font-weight: bold;
+        color: black;
+    }
+
+        .form-control:focus {
+            border-color: #2d2697;
+            box-shadow: 0 0 5px rgba(74, 0, 134, 1);
+        }
+
+    /* Validation Message */
+    .text-danger {
+        font-size: 0.8rem; /* Reduced from 0.9rem */
+        color: darkred;
+        margin-top: 4px; /* Reduced from 5px */
+    }
+
+    /* Product Image Styling */
+    .form-group img {
+        max-width: 240px; /* Reduced from 300px */
+        max-height: 240px; /* Reduced from 300px */
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Submit Button Styling */
+    .btn-edit {
+        padding: 10px 14px; /* Reduced from 12px 18px */
+        font-size: 0.88rem; /* Reduced font size */
+        border-radius: 5px;
+        background-color: #ff0063;
+        color: white;
+        border: none;
+        box-shadow: 0 0 8px rgba(204, 0, 134, 1);
+        transition: background-color 0.3s, box-shadow 0.3s, text-shadow 0.3s;
+        font-weight: bold;
+    }
+
+        .btn-edit:hover {
+            background-color: #a33bfe;
+        }
+
+    /* Styling for Back to List Button */
+    .back-button {
+        
+        font-size: 0.88rem; /* Reduced font size */
+        padding: 10px 14px; /* Reduced from 12px 18px */
+        border-radius: 5px;
+        background-color: #0696f2;
+        color: white;
+        border: none;
+        box-shadow: 0 0 8px rgba(0, 153, 255, 0.4);
+        transition: background-color 0.3s;
+        font-weight: bold;
+    }
+
+        .back-button:hover {
+            background-color: #1d7cb9;
+        }
+
+    /* Optional: Styling for the container of form buttons */
+    .form-buttons {
+        margin-top: 10px;
+    }
+
+
+
+</style>
