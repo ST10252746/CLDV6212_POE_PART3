@@ -95,20 +95,23 @@
 }
 
 <style>
-    /* Page Header */
+
+    .body{
+        font-family: 'Helvetica', sans-serif;
+    }
+    /* Hero Section */
     .hero-section {
         position: relative;
-        height: 400px;
+        height: 320px; /* Adjusted to simulate 80% zoom */
         background-color: #000;
-        overflow: hidden;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
     .hero-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        opacity: 0.8;
+        opacity: 0.7;
     }
 
     .hero-overlay {
@@ -118,34 +121,28 @@
         width: 100%;
         height: 100%;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
-        color: white;
+        justify-content: center;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
     }
 
     .hero-welcome {
-        font-size: 4rem;
+        font-size: 3.2rem; /* Reduced font size for 80% zoom effect */
         color: #c14ffc;
         text-shadow: 0 0 10px #4f2afe, 0 0 20px #c14ffc;
-        font-family: 'Helvetica', sans-serif;
-        }
-
-    .glow-text {
-        color: #ff66c4;
-        text-shadow: 0 0 5px #ff66c4, 0 0 10px #4f2afe, 0 0 15px #c14ffc;
         font-family: 'Helvetica', sans-serif;
     }
 
     /* Button Glow Effect */
     .btn-glow {
-        padding: 10px 20px;
+        padding: 8px 18px;
+        font-size: 14px; /* Reduced size */
+        border-radius: 25px;
         background-color: #c14ffc;
         color: white;
-        font-size: 16px;
-        border-radius: 25px;
-        text-decoration: none;
+        box-shadow: 0 0 8px #c14ffc;
         transition: all 0.3s ease;
+        margin-top: 20px;
     }
 
         .btn-glow:hover {
@@ -153,40 +150,78 @@
             box-shadow: 0 0 15px #c14ffc, 0 0 25px #4f2afe;
         }
 
-    /* Product Cards */
+    h5.lh-base.mb-0 {
+        text-shadow: 0 0 10px #4f2afe, 0 0 20px #c14ffc !important;
+        }
+    /* Product Card */
     .product-card {
-        text-align: center;
-        padding: 1rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Default shadow */
-        border: 2px solid #c14ffc; /* Purple glow border */
+        padding: 0.8rem;
+        border-radius: 8px;
+        border: 2px solid #c14ffc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
         font-family: 'Helvetica', sans-serif;
+        font-size: 90%; /* Reduced text size for 80% zoom effect */
     }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
-            box-shadow: 0 0 10px 3px rgba(194, 79, 252, 0.8); /* Purple glow effect */
+            transform: translateY(-8px);
+            box-shadow: 0 0 12px #c14ffc, 0 0 18px #4f2afe;
         }
-    /* Availability Box Wrapper */
-    .availability-box-wrapper {
-        position: absolute; /* Position it above the image */
-        top: 10px; /* Distance from the top of the card */
-        left: 50%;
-        transform: translateX(-50%); /* Center it horizontally */
-        z-index: 1; /* Ensure it appears above other elements */
+
+
+   
+    /* Product Card Text Styles */
+    .text-primary.fw-medium {
+        color: #ff66c4 !important;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .card-description {
+        font-size: 0.9rem;
+        color: #2d2697;
+        margin-top: 8px;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .card-price {
+        font-size: 1rem;
+        color: black;
+        font-weight: bold;
+        margin-top: 4px;
+    }
+
+    /* Portfolio Overlay */
+    .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        background: rgba(0, 0, 0, 0.5);
+        transition: opacity 0.3s;
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+        opacity: 1;
     }
 
     /* Availability Box */
     .availability-box {
-        padding: 5px 10px;
+        margin-top: 8px;
+        padding: 4px 8px;
         border-radius: 5px;
-        text-align: center;
+        font-size: 0.85rem;
         font-weight: bold;
+        text-align: center;
         width: 100%; /* Ensure it spans the entire width */
     }
-
     /* Optional: Adjust the hover effect to make sure the availability box remains on top */
     .portfolio-item:hover .availability-box {
         z-index: 2;
@@ -201,23 +236,22 @@
         background-color: red;
     }
 
-    /* Style for the "Add to Cart" icon */
+    /* Centered cart icon */
     .add-to-cart-icon {
-        position: relative;
-        font-size: 25px;
-        bottom: 10px;
-        left: 0px;
-        background-color: #fff;
-        color: #4f2afe;
-        padding: 10px;
-        border-radius: 55%;
+        font-size: 20px;
+        color: black;
+        padding: 6px;
+        border-radius: 50%;
         cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-        height: auto;
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        justify-content: center; /* Centers horizontally */
+        align-items: center; /* Centers vertically */
+        text-shadow: 0 0 10px #4f2afe, 0 0 20px #c14ffc !important;
     }
 
         .add-to-cart-icon:hover {
-            background-color: #fff;
-            color: #c14ffc;
+            color: #4c0669;
+            text-shadow: 0 0 10px #2d2697, 0 0 20px #573dff !important;
         }
 </style>
