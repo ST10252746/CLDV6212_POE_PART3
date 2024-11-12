@@ -1,21 +1,14 @@
 ﻿@model ST10252746_CLDV6212_POE_PART3.Models.Product
-
-@{
-    ViewData["Title"] = "Details";
-}
 <div class="container-product">
-    <h1>Details</h1>
-
     <div class="product-details-container">
-        <div class="product-details-header">
-            Product Details
-        </div>
-        <div class="product-details-content">
-            <div class="row">
-                <div class="col-sm-3">
-                    <img src="@Model.ImageUrlpath" class="product-image" />
-                </div>
-                <div class="col-sm-9">
+        <h2 class="product-details-header">Product Details</h2>
+    </div> <!-- Close product-details-container div here -->
+
+    <div class="product-details-content">
+        <table class="product-details-table">
+            <tr>
+                <td><img src="@Model.ImageUrlpath" class="product-image" /></td>
+                <td>
                     <div class="product-details-label">Name:</div>
                     <div class="product-details-value">@Model.Name</div>
 
@@ -41,14 +34,181 @@
                             }
                         }
                     </div>
-                </div>
-            </div>
-        </div>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="product-options">
-        <a asp-action="Edit" asp-route-id="@Model?.ProductId" class="btn btn-primary">Edit</a> |
-        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model?.ProductId" class="btn-edit">Edit</a> |
+        <a asp-action="Index" class="btn-back">Back to List</a>
     </div>
+</div> <!-- Close container-product div here -->
 
-</div>
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Helvetica', sans-serif;
+        background-color: #524da0;
+    }
+
+    /* Product Details Container */
+    .container-product {
+        width: 64%; /* Reduced container width to simulate 80% zoom */
+        max-width: 800px; /* Optional: Set a maximum width to prevent excessive stretch */
+        padding: 16px; /* Reduced padding */
+        background: linear-gradient(135deg, #531b6a 0%, #531b6a 100%); /* Gradient background */
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        margin: 0 auto; /* Center the container */
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+        margin-top: 40px;
+    }
+
+        .container-product:hover {
+            transform: translateY(-5px); /* Slight lift effect */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+        }
+
+    /* Product Details Header */
+    .product-details-header {
+        text-align: center;
+        font-size: 2.4rem; 
+        color: white;
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        margin-bottom: 16px; /* Reduced margin */
+        border-bottom: 1px solid #f0f2f5;
+    }
+
+    /* Table for Product Details */
+    .product-details-table {
+        width: 90%; /* Reduced table width */
+        margin: 0 auto; /* Center the table */
+        border-collapse: collapse;
+        margin-top: 18px; /* Reduced margin */
+        background-color: #f2f2f2; /* Table background color */
+        border-radius: 8px;
+        border-collapse: collapse;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+        .product-details-table th,
+        .product-details-table td {
+            padding: 12px; /* Reduced padding */
+            vertical-align: middle;
+            border: 1px solid #cccccc;
+            text-align: left;
+        }
+
+        .product-details-table th {
+            background-color: #531b6a; /* Dark purple header background */
+            color: white;
+            font-size: 1rem; /* Reduced font size */
+            font-weight: bold;
+        }
+
+        .product-details-table td {
+            font-size: 0.8rem; /* Reduced font size */
+            color: #333;
+        }
+
+        /* Alternating Row Colors for Table */
+        .product-details-table tr:nth-child(even) {
+            background-color: #f9f9f9; /* Light gray for even rows */
+        }
+
+        .product-details-table tr:hover {
+            background-color: #f1f1f1; /* Light hover effect on rows */
+        }
+
+    /* Labels for Product Details */
+    .product-details-label {
+        font-size: 0.96rem; /* Reduced font size */
+        color: #2d2697; /* Deep purple */
+        text-shadow: 0 0 4px rgba(74, 0, 134, 1);
+        font-weight: bold;
+        margin-bottom: 4px; /* Reduced margin */
+    }
+
+    .product-details-value {
+        font-size: 0.88rem; /* Reduced font size */
+        color: black;
+        margin-bottom: 12px; /* Reduced margin */
+        font-weight: bold;
+    }
+
+    .product-image {
+        max-width: 160px; /* Reduced image width */
+        border-radius: 6px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Availability Status */
+    .available-true {
+        color: green;
+        font-size: 0.88rem; /* Reduced font size */
+        font-weight: bold;
+    }
+
+    .available-false {
+        color: red;
+        font-size: 0.88rem; /* Reduced font size */
+        font-weight: bold;
+    }
+
+    /* General Button Styling */
+    .product-options {
+        display: flex; /* Use flexbox */
+        justify-content: center; /* Horizontally center the buttons */
+        align-items: flex-end; /* Vertically align buttons to the bottom */
+        gap: 8px; /* Reduced gap between buttons */
+        position: relative;
+        height: 96%; /* Reduced height */
+    }
+
+        .product-options .btn-edit, .product-options .btn-back {
+            padding: 10px 14px; /* Reduced padding */
+            font-size: 0.88rem; /* Reduced font size */
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s, text-shadow 0.3s;
+            border-color: white;
+        }
+
+        /* .btn-edit Styling */
+        .product-options .btn-edit {
+            background-color: #a33bfe;
+            color: white;
+            box-shadow: 0 0 6px rgba(204, 0, 134, 1);
+        }
+
+            .product-options .btn-edit:hover {
+                background-color: #ff0063; /* Hover color for edit button */
+            }
+
+        /* .btn-back Styling */
+        .product-options .btn-back {
+            background-color: #0696f2;
+            color: white;
+            box-shadow: 0 0 6px rgba(7, 146, 210, 1);
+        }
+
+            .product-options .btn-back:hover {
+                background-color: #1d7cb9;
+            }
+
+    /* Optional: Border Radius */
+    .product-details-container, .product-options {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+</style>
+
+
+
+
+
