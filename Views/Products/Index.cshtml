@@ -1,27 +1,28 @@
 ﻿@model IEnumerable<ST10252746_CLDV6212_POE_PART3.Models.Product>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
 <div class="container-products">
     <h1>Product Inventory</h1>
 
-
-    <a class="create-new" asp-action="Create">Create New</a>
-
-
-    <div class="filter-container">
-        <p>Filter By Category:</p>
-        @using (Html.BeginForm("Index", "Products", FormMethod.Get))
-        {
-            <div class="form-group">
-                @Html.DropDownList("category", ViewBag.Category as SelectList, "All Categories", new { @class = "form-control" })
-            </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
-        }
+    <!-- Create New Button -->
+    <div class="create-new-container">
+        <a class="create-new" asp-action="Create">Create New</a>
     </div>
 
+    <!-- Filter Section -->
+    <div class="filter-container">
+        <div class="category-section">
+            <p>Filter By Category:</p>
+            @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+            {
+                <div class="form-group">
+                    @Html.DropDownList("category", ViewBag.Category as SelectList, "All Categories", new { @class = "form-control" })
+                </div>
+            }
+        </div>
+        <button type="submit" class="btn-primary">Filter</button>
+    </div>
+
+    <!-- Product Table -->
     <table>
         <thead>
             <tr>
@@ -44,7 +45,7 @@
                     <td>@Html.DisplayFor(modelItem => item.Category)</td>
                     <td>@Html.DisplayFor(modelItem => item.Availability)</td>
                     <td>
-                        <img src="@item.ImageUrlpath" alt="Product Image" style="width: 100px; height: 110px;" />
+                        <img src="@item.ImageUrlpath" alt="Product Image" />
                     </td>
                     <td class="actions">
                         <a href="@Url.Action("Edit", new { id = item.ProductId })"><i class="fas fa-edit"></i> Edit</a>
@@ -56,3 +57,208 @@
         </tbody>
     </table>
 </div>
+
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Helvetica', sans-serif;
+        background-color: #524da0;
+        font-size: 80%; /* Reduced font size for 80% zoom effect */
+    }
+
+    /* Container Styling for Product Inventory */
+    .container-products {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 19px; /* Reduced padding for zoom effect */
+        background: linear-gradient(135deg, #531b6a 0%, #531b6a 100%);
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-top: 40px; /* Reduced margin for zoom effect */
+    }
+
+        .container-products:hover {
+            transform: translateY(-4px); /* Hover effect */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .container-products h1 {
+            text-align: center;
+            font-size: 2.72rem; /* Reduced font size */
+            color: white;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+            margin-bottom: 12px; /* Reduced margin */
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+    /* Create New Button Centering */
+    .create-new-container {
+        text-align: center;
+        margin-top: 18px;
+        margin-bottom: 18px;
+    }
+
+    /* Create New Button Styling */
+    .create-new {
+        padding: 8px 16px; /* Reduced padding */
+        background-color: #ff0063 !important;
+        color: black;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 0.9rem; /* Reduced font size */
+        box-shadow: 0 0 8px rgba(204, 0, 134, 1);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s;
+        
+    }
+
+        .create-new:hover {
+            background-color: #a33bfe !important;
+            box-shadow: 0 0 8px rgba(204, 0, 134, 1);
+        }
+
+    /* Center the entire filter section */
+    .filter-wrapper {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        width: 50%;
+        margin: 0 auto; /* Center align the wrapper */
+    }
+
+    /* Filter Section */
+    .filter-container {
+        background-color: white;
+        padding: 12px; /* Reduced padding */
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 16px; /* Reduced margin */
+        display: flex;
+        align-items: center;
+        gap: 16px; /* Adjusted gap */
+    }
+
+    /* Category Section (Label and Dropdown) */
+    .category-section {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Reduced gap between label and dropdown */
+    }
+
+    .filter-container p {
+        font-size: 1rem; /* Reduced font size */
+        font-weight: bold;
+        color: #2d2697;
+        margin: 0;
+        text-shadow: 0 0 4px rgba(20, 59, 255, 1);
+    }
+
+    .filter-container .form-group {
+        margin-right: 8px; /* Reduced margin */
+    }
+
+    .filter-container .form-control {
+        padding: 6px 12px; /* Reduced padding */
+        font-size: 0.9rem; /* Reduced font size */
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: auto;
+        min-width: 180px; /* Adjusted minimum width */
+        transition: border-color 0.3s ease;
+    }
+
+        .filter-container .form-control:focus {
+            border-color: #0696f2;
+        }
+
+    /* Button Styling */
+    .filter-container button {
+        background-color: #0696f2;
+        color: white;
+        padding: 8px 16px; /* Reduced padding */
+        font-size: 1rem; /* Reduced font size */
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 0 8px rgba(0, 153, 255, 0.4);
+        font-weight: bold;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+        .filter-container button:hover {
+            background-color: #1d7cb9;
+            box-shadow: 0 0 12px rgba(0, 153, 255, 0.8);
+        }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-top: 16px; /* Reduced margin */
+        background-color: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        font-weight: bold;
+    }
+
+        /* Table Header Styling */
+        table th {
+            padding: 10px; /* Reduced padding */
+            text-align: left;
+            color: #ffffff;
+            background-color: #2d2697;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 1);
+            font-weight: bold;
+            font-size: 1.1rem; /* Reduced font size */
+        }
+
+        /* Table Body Styling */
+        table td {
+            padding: 10px; /* Reduced padding */
+            text-align: left;
+            color: black;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+            font-size: 0.9rem; /* Reduced font size */
+        }
+
+        /* Hover effect for table rows */
+        table tr:hover {
+            background-color: #f2f2f2;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Image styling in table */
+        table td img {
+            width: 90px; /* Reduced image width */
+            height: 99px; /* Reduced image height */
+            object-fit: cover;
+        }
+
+    /* Actions Column */
+    .actions {
+        display: flex;
+        gap: 12px; /* Reduced gap */
+    }
+
+        .actions a {
+            color:  #ff0063 !important;
+            text-decoration: none;
+            font-size: 0.9rem; /* Reduced font size */
+            font-weight: bold;
+            transition: color 0.3s ease, text-shadow 0.3s;
+        }
+
+            .actions a:hover {
+                color: #a33bfe !important;
+                text-shadow: 0 0 8px rgba(204, 0, 134, 1);
+            }
+
+        .actions i {
+            margin-right: 5px;
+        }
+</style>
+
