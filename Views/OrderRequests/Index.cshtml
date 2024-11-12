@@ -28,7 +28,7 @@
                     <td>@Html.DisplayFor(modelItem => item.OrderRequestId)</td>
                     <td>@Html.DisplayFor(modelItem => item.OrderId)</td>
                     <td>@Html.DisplayFor(modelItem => item.Product.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Product.Price)</td>
+                    <td>@("R" + string.Format("{0:N2}", item.Product.Price))</td>
                 </tr>
             }
         </tbody>

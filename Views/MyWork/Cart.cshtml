@@ -57,7 +57,7 @@
         <script>
             function checkout() {
                 var totalPrice = document.getElementById('totalPrice').value;
-                R.post('/MyWork/Checkout', { totalPrice: totalPrice }, function (response) {
+                $.post('/MyWork/Checkout', { totalPrice: totalPrice }, function (response) {
                     if (response.success) {
                         alert('Order placed successfully');
                         window.location.href = '/MyWork/Index'; // Redirect to product listing after checkout
@@ -69,7 +69,7 @@
         </script>
         <script>
             function removeFromCart(productId) {
-                R.post('/MyWork/RemoveFromCart', { productId: productId }, function (response) {
+                $.post('/MyWork/RemoveFromCart', { productId: productId }, function (response) {
                     if (response.success) {
                         alert('Item removed from cart');
                         location.reload(); // Refresh the page to update the cart
