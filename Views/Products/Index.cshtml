@@ -10,16 +10,14 @@
 
     <!-- Filter Section -->
     <div class="filter-container">
-        <div class="category-section">
-            <p>Filter By Category:</p>
-            @using (Html.BeginForm("Index", "Products", FormMethod.Get))
-            {
-                <div class="form-group">
-                    @Html.DropDownList("category", ViewBag.Category as SelectList, "All Categories", new { @class = "form-control" })
-                </div>
-            }
-        </div>
-        <button type="submit" class="btn-primary">Filter</button>
+        <p>Filter By Category:</p>
+        @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+        {
+            <div class="form-group">
+                @Html.DropDownList("category", ViewBag.Category as SelectList, "All Categories", new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        }
     </div>
 
     <!-- Product Table -->
@@ -136,7 +134,7 @@
         margin-bottom: 16px; /* Reduced margin */
         display: flex;
         align-items: center;
-        gap: 16px; /* Adjusted gap */
+        gap: 16px; /* Space between dropdown and button */
     }
 
     /* Category Section (Label and Dropdown) */
@@ -154,10 +152,13 @@
         text-shadow: 0 0 4px rgba(20, 59, 255, 1);
     }
 
+    /* Form Group Styling */
     .filter-container .form-group {
         margin-right: 8px; /* Reduced margin */
+        display: flex; /* Ensure the dropdown and button are on the same line */
     }
 
+    /* Form Control Styling */
     .filter-container .form-control {
         padding: 6px 12px; /* Reduced padding */
         font-size: 0.9rem; /* Reduced font size */
@@ -186,10 +187,23 @@
         cursor: pointer;
     }
 
+        /* Button Hover Effect */
         .filter-container button:hover {
             background-color: #1d7cb9;
             box-shadow: 0 0 12px rgba(0, 153, 255, 0.8);
         }
+
+    /* Move button to the right of the dropdown */
+    .filter-container form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .filter-container .form-group,
+    .filter-container button {
+        margin: 0;
+    }
 
     /* Table Styling */
     table {
