@@ -4,64 +4,196 @@
 }
 
 <div class="delete-container">
-    <h1 style="color:red;">Delete</h1>
+    <h1>Delete Product</h1>
 
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>Product</h4>
+    <h3>Are you sure you want to delete this product?</h3>
+
+    <div class="product-details">
+        <h4>Product Details</h4>
         <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ProductDescription)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.ProductDescription)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Price)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Category)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Category)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Availability)
-            </dt>
-            <dd class="col-sm-10">
-                @{
-                    if (Model.Availability.HasValue && Model.Availability.Value)
-                    {
-                        <p class="available-true">Available</p>
-                    }
-                    else
-                    {
-                        <p class="available-false">Out of Stock</p>
-                    }
-                }
-            </dd>
-            <dt class="col-sm-2">
-                Product Image
-            </dt>
-            <dd class="col-sm-10">
-                <img src="@Model.ImageUrlpath" class="product-image" />
-            </dd>
-        </dl>
 
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="ProductId" />
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
-            <i class="fa fa-reply" aria-hidden="true"></i><a asp-action="Index">Back to List</a>
-        </form>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ProductDescription)</th>
+                    <td>@Html.DisplayFor(model => model.ProductDescription)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Price)</th>
+                    <td>@Html.DisplayFor(model => model.Price)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Category)</th>
+                    <td>@Html.DisplayFor(model => model.Category)</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Availability)</th>
+                    <td>
+                        @if (Model.Availability.HasValue && Model.Availability.Value)
+                        {
+                            <p class="available-true">Available</p>
+                        }
+                        else
+                        {
+                            <p class="available-false">Out of Stock</p>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Product Image</th>
+                    <td><img src="@Model.ImageUrlpath" class="product-image" /></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
+    <form asp-action="Delete" class="delete-form">
+        <input type="hidden" asp-for="ProductId" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <span class="back-link">
+            | <i class="fa fa-reply" aria-hidden="true"></i>
+            <a asp-action="Index">Back to List</a>
+        </span>
+    </form>
 </div>
+
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Helvetica', sans-serif;
+        background-color: #524da0;
+    }
+
+    /* Centralized Delete Container */
+    .delete-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #531b6a 0%, #531b6a 100%);
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+       
+    }
+
+        .delete-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .delete-container h1 {
+            color: red;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 6px rgba(255, 3, 23, 1)
+        }
+
+    .product-details h4 {
+            color: white;
+            font-size: 2.4rem;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        border-bottom: 1px solid #f0f2f5;
+        
+        }
+
+        .delete-container h3 {
+            font-size: 1.5rem;
+            color: black;
+            margin-bottom: 30px;
+            font-style: italic;
+      
+        }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+        background-color: #f2f2f2;
+        border-radius: 8px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+        border-collapse: collapse; /* Ensures borders collapse between cells */
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #cccccc;
+
+    }
+    td{
+        color: black;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+    th {
+        color: #2d2697 !important;
+        text-shadow: 0 0 4px rgba(74, 0, 134, 1);
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9; 
+    }
+    .product-image {
+        max-width: 200px;
+        margin: 20px auto;
+        display: block;
+        border-radius: 6px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Availability Status */
+    .available-true {
+        color: green;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .available-false {
+        color: red;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    /* Form Styling */
+    .delete-form {
+        margin-top: 20px;
+    }
+
+        .delete-form input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 0 6px rgba(255, 3, 23, 1);
+        }
+
+            .delete-form input[type="submit"]:hover {
+                background-color: darkred;
+            }
+
+    .back-link {
+        font-size: 1rem;
+        color: #007bff !important;
+        text-decoration: none;
+       
+    }
+
+        .back-link:hover {
+            text-decoration: underline;
+            color: #ff0063 !important;
+        }
+
+</style>
